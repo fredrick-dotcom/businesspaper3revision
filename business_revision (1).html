@@ -1,0 +1,2818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A-Level Business Revision — Paper 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #16161d;
+    --surface2: #1e1e28;
+    --border: #2a2a38;
+    --accent: #f5c842;
+    --accent2: #e87b3a;
+    --accent3: #5ec4a8;
+    --text: #e8e8f0;
+    --muted: #888899;
+    --red: #e85c5c;
+    --blue: #5c9be8;
+    --green: #5ec4a8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .logo span { color: var(--muted); font-weight: 400; font-size: 0.85rem; margin-left: 0.5rem; }
+
+  /* NAV DROPDOWN */
+  nav { display: flex; gap: 0.25rem; align-items: center; flex-wrap: wrap; }
+
+  .nav-group { position: relative; }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--surface2);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .nav-btn .arrow { font-size: 0.65rem; transition: transform 0.2s; }
+  .nav-group.open .arrow { transform: rotate(180deg); }
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-width: 260px;
+    z-index: 200;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .nav-group.open .dropdown { display: block; }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.65rem 1rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.12s;
+    font-weight: 400;
+  }
+
+  .dropdown-item:last-child { border-bottom: none; }
+
+  .dropdown-item:hover {
+    background: var(--surface2);
+    color: var(--text);
+    padding-left: 1.3rem;
+  }
+
+  .dropdown-item .badge {
+    float: right;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* DIRECT NAV BUTTONS */
+  .nav-direct {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .nav-direct:hover { border-color: var(--accent3); color: var(--accent3); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  /* HOME PAGE */
+  .home-hero {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .home-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .home-hero h1 em { color: var(--accent); font-style: normal; }
+  .home-hero p { color: var(--muted); max-width: 540px; margin: 0 auto 2.5rem; font-size: 1rem; }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .home-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .home-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(245,200,66,0.1);
+  }
+
+  .home-card .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .home-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .home-card .marks {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .home-card .marks.gold { background: var(--accent); }
+  .home-card .marks.orange { background: var(--accent2); }
+  .home-card .marks.teal { background: var(--accent3); color: #000; }
+
+  /* SECTION DIVIDER */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* CONTENT PAGES */
+  .page { display: none; animation: fadeIn 0.25s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header .meta { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .tag-marks { background: var(--accent); color: #000; }
+  .tag-topic { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .tag-type { background: rgba(94,196,168,0.15); color: var(--green); border: 1px solid rgba(94,196,168,0.3); }
+
+  /* QUESTION BOX */
+  .question-box {
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.6rem 1.1rem;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+  }
+
+  .tab-btn.active { border-bottom-color: var(--accent); color: var(--accent); }
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CONTENT BLOCKS */
+  .content-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .content-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .content-block h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 1.25rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+  }
+
+  .content-block p { color: var(--muted); margin-bottom: 0.75rem; font-size: 0.9rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+
+  .content-block ul { list-style: none; padding: 0; }
+
+  .content-block ul li {
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative;
+    color: var(--muted);
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(42,42,56,0.5);
+  }
+
+  .content-block ul li:last-child { border-bottom: none; }
+
+  .content-block ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.35rem;
+  }
+
+  /* PEACH CARDS */
+  .peach-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .peach-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .peach-row {
+    display: flex;
+    gap: 1rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .peach-row:last-child { border-bottom: none; }
+  .peach-row .label { font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); min-width: 70px; padding-top: 0.2rem; }
+  .peach-row .text { font-size: 0.88rem; color: var(--text); flex: 1; line-height: 1.6; }
+
+  .p-letter { background: rgba(245,200,66,0.15); color: var(--accent); }
+  .e-letter { background: rgba(232,123,58,0.15); color: var(--accent2); }
+  .a-letter { background: rgba(94,196,168,0.15); color: var(--green); }
+  .c-letter { background: rgba(92,155,232,0.15); color: var(--blue); }
+  .h-letter { background: rgba(232,92,92,0.15); color: var(--red); }
+
+  /* KEY TERMS TABLE */
+  .terms-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+
+  .terms-table th {
+    background: var(--surface2);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terms-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .terms-table tr:last-child td { border-bottom: none; }
+  .terms-table tr:hover td { background: var(--surface2); }
+
+  .terms-table td:first-child {
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    width: 35%;
+  }
+
+  .terms-table td:last-child { color: var(--muted); }
+
+  /* MOPS CARD */
+  .mops-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  @media (max-width: 600px) { .mops-card { grid-template-columns: 1fr; } }
+
+  .mops-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .mops-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .mops-name { font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.5rem; }
+  .mops-text { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin: 0.75rem 0;
+  }
+
+  /* HIGHLIGHT BOXES */
+  .highlight {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+
+  .highlight.gold { background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.25); color: var(--text); }
+  .highlight.red { background: rgba(232,92,92,0.08); border: 1px solid rgba(232,92,92,0.25); color: var(--text); }
+  .highlight.teal { background: rgba(94,196,168,0.08); border: 1px solid rgba(94,196,168,0.25); color: var(--text); }
+  .highlight.blue { background: rgba(92,155,232,0.08); border: 1px solid rgba(92,155,232,0.25); color: var(--text); }
+
+  .highlight strong { display: block; margin-bottom: 0.25rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .highlight.gold strong { color: var(--accent); }
+  .highlight.red strong { color: var(--red); }
+  .highlight.teal strong { color: var(--green); }
+  .highlight.blue strong { color: var(--blue); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* CONCLUSION BOX */
+  .conclusion {
+    background: linear-gradient(135deg, rgba(245,200,66,0.05), rgba(232,123,58,0.05));
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .conclusion h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .conclusion p { color: var(--text); font-size: 0.9rem; }
+
+  /* STRUCTURE BOX */
+  .structure-steps { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .structure-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--surface2);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .step-num {
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.72rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-text { font-size: 0.85rem; color: var(--text); }
+
+  /* SCROLL TO TOP */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 1.5rem;
+    transition: all 0.15s;
+  }
+
+  .back-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  /* FLASHCARD STYLES */
+  .fc-setup { max-width: 480px; margin: 0 auto; text-align: center; padding: 2rem 0; }
+  .fc-setup h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .fc-setup p { color: var(--muted); margin-bottom: 2rem; }
+  .fc-slider-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .fc-slider-wrap label { font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 1rem; }
+  .fc-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 0.5rem; }
+  .fc-count-label { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.5rem; }
+  input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid var(--bg); }
+  .fc-filter-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; text-align: left; }
+  .fc-filter-wrap label { font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.75rem; }
+  .fc-filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .fc-filter-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; transition: all 0.15s; text-align: left; }
+  .fc-filter-btn.selected { background: rgba(245,200,66,0.1); border-color: var(--accent); color: var(--accent); }
+  .fc-start-btn { background: var(--accent); color: #000; border: none; padding: 0.85rem 2.5rem; border-radius: 8px; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.15s; width: 100%; }
+  .fc-start-btn:hover { background: #e0b52e; transform: translateY(-1px); }
+  .fc-start-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
+
+  /* FLASHCARD GAME */
+  .fc-game { display: none; }
+  .fc-game.active { display: block; }
+  .fc-hud { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .fc-hud .fc-prog { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--muted); }
+  .fc-hud .fc-score { display: flex; gap: 1rem; }
+  .fc-hud .fc-s-got { color: var(--green); font-weight: 700; font-size: 0.85rem; }
+  .fc-hud .fc-s-miss { color: var(--red); font-weight: 700; font-size: 0.85rem; }
+  .fc-progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
+  .fc-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; }
+  .fc-card-wrap { perspective: 1000px; height: 260px; cursor: pointer; margin-bottom: 1.5rem; }
+  .fc-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .fc-card.flipped { transform: rotateY(180deg); }
+  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; border: 1px solid var(--border); }
+  .fc-front { background: var(--surface); }
+  .fc-back { background: var(--surface2); transform: rotateY(180deg); border-color: var(--accent); }
+  .fc-face-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; }
+  .fc-term { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .fc-def { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+  .fc-tag { margin-top: 0.75rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .fc-flip-hint { color: var(--muted); font-size: 0.78rem; text-align: center; margin-bottom: 1.25rem; }
+  .fc-actions { display: flex; gap: 1rem; }
+  .fc-btn { flex: 1; padding: 0.85rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+  .fc-btn-got { background: rgba(94,196,168,0.15); color: var(--green); border: 1px solid rgba(94,196,168,0.3); }
+  .fc-btn-got:hover { background: rgba(94,196,168,0.25); }
+  .fc-btn-miss { background: rgba(232,92,92,0.15); color: var(--red); border: 1px solid rgba(232,92,92,0.3); }
+  .fc-btn-miss:hover { background: rgba(232,92,92,0.25); }
+  .fc-skip { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 0.78rem; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; display: block; margin: 0.75rem auto 0; transition: all 0.15s; }
+  .fc-skip:hover { color: var(--text); border-color: var(--muted); }
+
+  /* FC RESULTS */
+  .fc-results { display: none; text-align: center; padding: 2rem 0; }
+  .fc-results.active { display: block; }
+  .fc-results h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+  .fc-results-score { font-size: 4rem; font-family: 'DM Mono', monospace; font-weight: 500; color: var(--accent); margin: 1rem 0; }
+  .fc-results-sub { color: var(--muted); margin-bottom: 2rem; }
+  .fc-missed-list { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; text-align: left; }
+  .fc-missed-list h3 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red); margin-bottom: 0.75rem; }
+  .fc-missed-item { padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .fc-missed-item:last-child { border-bottom: none; }
+  .fc-missed-item strong { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.8rem; }
+  .fc-restart-btn { background: var(--accent); color: #000; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; cursor: pointer; margin-right: 0.75rem; transition: all 0.15s; }
+  .fc-restart-btn:hover { background: #e0b52e; }
+  .fc-back-home-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 0.75rem 2rem; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; }
+  .fc-back-home-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  /* PROGRESS TRACKER */
+  .progress-overview { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+  .prog-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; }
+  .prog-stat .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+  .prog-stat .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+  .prog-bar-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .prog-bar-wrap h3 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .prog-bar-track { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+  .prog-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 5px; transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
+  .prog-section { margin-bottom: 1.5rem; }
+  .prog-section-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prog-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.15s; }
+  .prog-item:hover { border-color: var(--accent); }
+  .prog-item.completed { background: rgba(94,196,168,0.05); border-color: rgba(94,196,168,0.25); }
+  .prog-check { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .prog-item.completed .prog-check { background: var(--green); border-color: var(--green); }
+  .prog-check-tick { color: #000; font-size: 0.75rem; font-weight: 700; display: none; }
+  .prog-item.completed .prog-check-tick { display: block; }
+  .prog-item-name { flex: 1; font-size: 0.88rem; color: var(--text); }
+  .prog-item.completed .prog-item-name { color: var(--muted); text-decoration: line-through; }
+  .prog-item-marks { font-size: 0.72rem; font-family: 'DM Mono', monospace; color: var(--muted); }
+  .prog-device-info { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+  .prog-device-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .prog-reset-btn { background: none; border: 1px solid var(--red); color: var(--red); padding: 0.4rem 0.9rem; border-radius: 6px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 1rem; transition: all 0.15s; }
+  .prog-reset-btn:hover { background: rgba(232,92,92,0.1); }
+
+  /* QUESTION PAGE PROGRESS SECTION */
+  .page-progress { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .page-progress h3 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem; }
+  .page-checklist { display: flex; flex-direction: column; gap: 0.5rem; }
+  .page-check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.15s; user-select: none; }
+  .page-check-item:hover { border-color: var(--accent); }
+  .page-check-item.done { background: rgba(94,196,168,0.05); border-color: rgba(94,196,168,0.25); }
+  .page-check-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .page-check-item.done .page-check-box { background: var(--green); border-color: var(--green); }
+  .page-check-tick { color: #000; font-size: 0.75rem; font-weight: 700; display: none; }
+  .page-check-item.done .page-check-tick { display: block; }
+  .page-check-label { font-size: 0.88rem; flex: 1; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  /* PROGRESS CHART */
+  .prog-chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .prog-chart-wrap h3 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .prog-chart-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  /* Donut ring */
+  .prog-donut-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .prog-donut-svg { display: block; }
+  .prog-donut-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+  /* Bar chart */
+  .prog-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .prog-bar-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 38px;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .prog-bar-name {
+    font-size: 0.76rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .prog-bar-track-sm {
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .prog-bar-fill-sm {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .prog-bar-fill-sm.done-bar { background: linear-gradient(90deg, var(--green), #3eb89a); }
+  .prog-bar-fill-sm.pending-bar { background: var(--border); }
+  .prog-bar-marks {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    text-align: right;
+  }
+  .prog-bar-marks.is-done { color: var(--green); }
+  @media (max-width: 600px) {
+    .prog-chart-inner { grid-template-columns: 1fr; }
+    .prog-donut-wrap { flex-direction: row; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Business Paper 3 <span>Revision — 2026</span></div>
+  <nav>
+    <button class="nav-direct" onclick="showPage('home')">🏠 Home</button>
+
+    <div class="nav-group" id="ng-secA">
+      <button class="nav-btn" onclick="toggleNav('ng-secA')">Section A — McVitie's <span class="arrow">▾</span></button>
+      <div class="dropdown">
+        <div class="dropdown-item" onclick="showPage('q1')">Q1 — Flexible Workforce <span class="badge">8m</span></div>
+        <div class="dropdown-item" onclick="showPage('q2')">Q2 — Taxation <span class="badge">10m</span></div>
+        <div class="dropdown-item" onclick="showPage('q3')">Q3 — Pladis & Nigeria <span class="badge">12m</span></div>
+        <div class="dropdown-item" onclick="showPage('q4')">Q4 — Investment Appraisal <span class="badge">20m</span></div>
+      </div>
+    </div>
+
+    <div class="nav-group" id="ng-secB">
+      <button class="nav-btn" onclick="toggleNav('ng-secB')">Section B — Lottie Shaw's <span class="arrow">▾</span></button>
+      <div class="dropdown">
+        <div class="dropdown-item" onclick="showPage('q5')">Q5 — Ltd Company Benefits <span class="badge">8m</span></div>
+        <div class="dropdown-item" onclick="showPage('q6')">Q6 — Bank Loan Finance <span class="badge">10m</span></div>
+        <div class="dropdown-item" onclick="showPage('q7')">Q7 — UK-EU Trade Deal <span class="badge">12m</span></div>
+        <div class="dropdown-item" onclick="showPage('q8')">Q8 — Growth Strategy <span class="badge">20m</span></div>
+      </div>
+    </div>
+
+    <div class="nav-group" id="ng-extra">
+      <button class="nav-btn" onclick="toggleNav('ng-extra')">Extra Resources <span class="arrow">▾</span></button>
+      <div class="dropdown">
+        <div class="dropdown-item" onclick="showPage('flashcards')">🃏 Flashcards</div>
+        <div class="dropdown-item" onclick="showPage('progress')">📈 Progress Tracker</div>
+        <div class="dropdown-item" onclick="showPage('peach')">✍️ PEACH & MOPS Framework</div>
+        <div class="dropdown-item" onclick="showPage('pestle')">🌐 PESTLE Analysis</div>
+        <div class="dropdown-item" onclick="showPage('ansoff')">📊 Ansoff Matrix</div>
+        <div class="dropdown-item" onclick="showPage('porters')">⚙️ Porter's Five Forces</div>
+        <div class="dropdown-item" onclick="showPage('keyterms')">📖 All Key Terms</div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <h1>A-Level Business<br><em>Paper 3 Revision</em></h1>
+    <p>All 8 mock questions with topic revision, PEACH paragraph plans, key terms and exam tips — all in one place.</p>
+  </div>
+
+  <div class="section-label">Section A — McVitie's / Pladis</div>
+  <div class="home-grid">
+    <div class="home-card" onclick="showPage('q1')">
+      <div class="q-num">Q1 · Section A</div>
+      <h3>Assess two possible benefits of a flexible workforce for McVitie's</h3>
+      <span class="marks gold">8 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q2')">
+      <div class="q-num">Q2 · Section A</div>
+      <h3>Assess the effect on McVitie's of changes in taxation</h3>
+      <span class="marks orange">10 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q3')">
+      <div class="q-num">Q3 · Section A</div>
+      <h3>Assess the impact of Pladis on the economy of Nigeria</h3>
+      <span class="marks orange">12 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q4')">
+      <div class="q-num">Q4 · Section A ⭐</div>
+      <h3>Evaluate both projects using ARR & NPV, recommend which one</h3>
+      <span class="marks teal">20 marks</span>
+    </div>
+  </div>
+
+  <div class="section-label">Section B — Lottie Shaw's / William Jacksons</div>
+  <div class="home-grid">
+    <div class="home-card" onclick="showPage('q5')">
+      <div class="q-num">Q5 · Section B</div>
+      <h3>Assess two benefits of operating as a private limited company</h3>
+      <span class="marks gold">8 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q6')">
+      <div class="q-num">Q6 · Section B</div>
+      <h3>Assess the value of a bank loan for raising finance for the new bakery</h3>
+      <span class="marks orange">10 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q7')">
+      <div class="q-num">Q7 · Section B</div>
+      <h3>Assess the effect of the UK's trade deal with the EU trading bloc</h3>
+      <span class="marks orange">12 marks</span>
+    </div>
+    <div class="home-card" onclick="showPage('q8')">
+      <div class="q-num">Q8 · Section B ⭐</div>
+      <h3>Evaluate multi-channel distribution OR own-label biscuit production</h3>
+      <span class="marks teal">20 marks</span>
+    </div>
+  </div>
+
+  <div class="section-label">Extra Resources</div>
+  <div class="home-grid">
+    <div class="home-card" onclick="showPage('flashcards')"><div class="q-num">Interactive</div><h3>🃏 Flashcard Quiz</h3></div>
+    <div class="home-card" onclick="showPage('progress')"><div class="q-num">Tracker</div><h3>📈 My Progress Tracker</h3></div>
+    <div class="home-card" onclick="showPage('peach')"><div class="q-num">Framework</div><h3>✍️ PEACH & MOPS Writing Guide</h3></div>
+    <div class="home-card" onclick="showPage('pestle')"><div class="q-num">Analysis</div><h3>🌐 PESTLE — Confectionery Industry</h3></div>
+    <div class="home-card" onclick="showPage('ansoff')"><div class="q-num">Strategy</div><h3>📊 Ansoff Matrix with Examples</h3></div>
+    <div class="home-card" onclick="showPage('porters')"><div class="q-num">Analysis</div><h3>⚙️ Porter's Five Forces</h3></div>
+    <div class="home-card" onclick="showPage('keyterms')"><div class="q-num">Reference</div><h3>📖 Complete Key Terms Glossary</h3></div>
+  </div>
+</div>
+
+<!-- Q1 PAGE -->
+<div id="page-q1" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section A · Q1 · 8 Marks · Topic 1.4.1</div>
+    <h1>Flexible Workforce</h1>
+    <div class="meta">
+      <span class="tag tag-marks">8 Marks</span>
+      <span class="tag tag-topic">1.4.1 Approaches to Staffing</span>
+      <span class="tag tag-type">Definition + 2× PEACH</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess two possible benefits of a flexible workforce for McVitie's."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3')">📖 Key Terms</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4')">💡 Exam Tips</button>
+  </div>
+
+  <div id="t1" class="tab-content active">
+    <div class="content-block">
+      <h2>📋 What is a Flexible Workforce?</h2>
+      <p>A workforce where employees can vary their hours, contracts or roles to meet changing business needs.</p>
+      <h3>Types of Flexible Working</h3>
+      <ul>
+        <li><strong>Zero-hours contracts</strong> — no guaranteed hours; worker called in when needed</li>
+        <li><strong>Part-time contracts</strong> — fewer than full-time hours; reduces fixed labour costs</li>
+        <li><strong>Temporary contracts</strong> — fixed period; used for seasonal Christmas/Easter peaks</li>
+        <li><strong>Multi-skilled workers</strong> — trained across multiple roles; can be redeployed</li>
+        <li><strong>Annualised hours</strong> — total hours agreed per year but distributed flexibly</li>
+      </ul>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ Benefits</h2>
+        <h3>Cost Reduction</h3>
+        <ul>
+          <li>Only pay for hours needed during quiet periods</li>
+          <li>Avoids redundancy costs — temporary contracts simply end</li>
+          <li>Reduces overtime premium payments</li>
+          <li>Lower fixed labour cost base improves margins</li>
+        </ul>
+        <h3>Adaptability</h3>
+        <ul>
+          <li>Respond quickly to demand changes (new product launches)</li>
+          <li>Multi-skilled workers move between departments</li>
+          <li>Trial new products without permanent staffing commitment</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>⚠️ Drawbacks (H Points)</h2>
+        <ul>
+          <li>Quality risk — flexible staff may lack specialist training</li>
+          <li>Motivation — zero-hours workers have less loyalty (Herzberg: removes job security hygiene factor)</li>
+          <li>High turnover — increases recruitment and training costs</li>
+          <li>Reputational risk — zero-hours contracts attract negative press</li>
+          <li>Legal risk — employment law changes may restrict flexible contracts</li>
+        </ul>
+        <h3>McVitie's Context</h3>
+        <ul>
+          <li>Demand spikes: Christmas, Easter, Valentine's Day</li>
+          <li>Core products: Jaffa Cakes, Digestives, Hobnobs, Penguin</li>
+          <li>Growing demand for vegan/free-from = new production skills needed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🎓 Theorists</h2>
+      <div class="two-col">
+        <div><h3>Taylor (Scientific Management)</h3><p>Workers motivated by money — flexible pay-per-hour aligns with this view.</p></div>
+        <div><h3>Herzberg (Hygiene Factors)</h3><p>Job security is a hygiene factor. Zero-hours removes it, causing dissatisfaction even if pay is adequate.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2" class="tab-content">
+    <div class="highlight gold"><strong>Structure Reminder</strong>Definition (1-2 sentences) → PEACH Paragraph 1 (Benefit 1) → PEACH Paragraph 2 (Benefit 2). No conclusion needed. Each paragraph MUST end with H.</div>
+    <div class="content-block">
+      <h2>🍑 PEACH Paragraph 1 — Cost Flexibility</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A flexible workforce allows McVitie's to reduce labour costs by aligning staffing levels with seasonal demand fluctuations.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">McVitie's (owned by Pladis) experiences significant demand spikes around Christmas and Easter — Jaffa Cakes and selection boxes. Temporary and zero-hours workers can be hired during peaks and released afterwards.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This reduces fixed labour costs during quieter periods, protecting profit margins without incurring redundancy costs. Labour is one of the largest operating costs in food manufacturing — flexibility directly improves cost efficiency.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">For a large-scale manufacturer like McVitie's producing millions of units, even a small reduction in unit labour costs across seasonal peaks represents significant savings at scale.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, over-reliance on flexible workers may reduce product consistency — temporary staff may lack specialist training of permanent employees. High staff turnover also increases recruitment costs, partially offsetting the savings.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH Paragraph 2 — Adaptability</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A flexible workforce enables McVitie's to respond more quickly to changing consumer preferences and new product launches.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Growing demand for vegan, gluten-free and reduced-sugar biscuits requires new production skills. A flexible workforce allows McVitie's to redeploy multi-skilled workers or bring in specialist temporary staff without restructuring permanently.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This gives McVitie's a competitive advantage — the ability to trial new product lines rapidly without long-term cost commitment reduces the financial risk of innovation.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">In the confectionery industry, health and wellness trends are reshaping consumer demand rapidly. Businesses that adapt production quickly are better placed to capture new market segments before competitors.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, allergen-free production lines require consistent, highly trained permanent staff. Flexibility has limits in specialist food manufacturing where quality and safety standards are tightly regulated.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t3" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Flexible Workforce</td><td>A workforce where employees vary hours, contracts or roles to meet changing business needs</td></tr>
+        <tr><td>Zero-Hours Contract</td><td>No guaranteed hours — worker only called in when the business needs them</td></tr>
+        <tr><td>Temporary Contract</td><td>Fixed-period employment contract — used for seasonal demand peaks without long-term commitment</td></tr>
+        <tr><td>Multi-Skilled Worker</td><td>Employee trained across multiple roles who can be redeployed as business needs change</td></tr>
+        <tr><td>Annualised Hours</td><td>Total working hours agreed per year but distributed flexibly across busy and quiet periods</td></tr>
+        <tr><td>Labour Turnover</td><td>Rate at which employees leave and are replaced — high turnover increases recruitment costs</td></tr>
+        <tr><td>Fixed Labour Cost</td><td>Labour costs that do not change with output — e.g. permanent salaries</td></tr>
+        <tr><td>Variable Labour Cost</td><td>Labour costs that change with output — e.g. temporary workers only paid for hours worked</td></tr>
+        <tr><td>Herzberg — Hygiene Factors</td><td>Basic needs (job security) that if removed cause dissatisfaction — zero-hours removes security</td></tr>
+        <tr><td>Taylor (Scientific Management)</td><td>Theory that workers are motivated primarily by money — supports pay-per-hour arrangements</td></tr>
+        <tr><td>Seasonal Demand</td><td>Predictable demand peaks linked to time of year — e.g. Christmas biscuit gift tins at McVitie's</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="t4" class="tab-content">
+    <div class="highlight gold"><strong>🎯 Exam Tip 1</strong>Always name the specific type of flexible contract — "zero-hours" or "temporary" is stronger than just "flexible workers".</div>
+    <div class="highlight teal"><strong>🎯 Exam Tip 2</strong>Reference Herzberg in your H point — removing job security damages motivation. This shows theoretical knowledge.</div>
+    <div class="highlight blue"><strong>🎯 Exam Tip 3</strong>Link to McVitie's seasonal peaks explicitly — Christmas and Easter are the key demand spikes for biscuit manufacturers.</div>
+    <div class="highlight gold"><strong>Structure Reminder — 8 marks</strong>Definition → PEACH 1 (cost flexibility ~150 words) → PEACH 2 (adaptability ~150 words). No conclusion. Strong H in every paragraph.</div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q1</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q1-topic" onclick="togglePageCheck('q1-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q1-peach" onclick="togglePageCheck('q1-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q1-terms" onclick="togglePageCheck('q1-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q1-done" onclick="togglePageCheck('q1-done');toggleProgress('q1')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q1 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 PAGE -->
+<div id="page-q2" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section A · Q2 · 10 Marks · Topics 2.5.1, 2.5.2</div>
+    <h1>Taxation & McVitie's</h1>
+    <div class="meta">
+      <span class="tag tag-marks">10 Marks</span>
+      <span class="tag tag-topic">2.5.1 Economic Influences</span>
+      <span class="tag tag-type">Definition + PEACH + Conclusion</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess the effect on McVitie's of changes in taxation."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q2')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q2')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q2')">📖 Key Terms</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4q2')">💡 Exam Tips</button>
+  </div>
+
+  <div id="t1q2" class="tab-content active">
+    <div class="two-col">
+      <div class="content-block">
+        <h2>📋 Direct Taxes</h2>
+        <ul>
+          <li><strong>Corporation Tax (25%)</strong> — tax on business profits; rose from 19% in 2023</li>
+          <li><strong>Income Tax</strong> — reduces consumer disposable income → less confectionery spending</li>
+          <li><strong>National Insurance</strong> — paid by employers on wages; a direct labour cost</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>📋 Indirect Taxes</h2>
+        <ul>
+          <li><strong>VAT (20%)</strong> — processed confectionery is subject to VAT</li>
+          <li><strong>Sugar Levy</strong> — introduced 2018 for soft drinks; lobbying pressure to extend to biscuits</li>
+          <li><strong>Import Tariffs</strong> — tax on imported ingredients (cocoa, sugar, nuts)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>⚡ Impact on McVitie's — Which Tax Matters Most?</h2>
+      <div class="two-col">
+        <div class="highlight blue"><strong>Corporation Tax Argument</strong>Directly reduces profit but doesn't affect demand. McVitie's can plan around it — Pladis has sophisticated transfer pricing strategies to mitigate impact.</div>
+        <div class="highlight red"><strong>Sugar Levy Argument ⭐</strong>Potentially MORE damaging — hits demand directly, not just profit. If biscuit demand falls due to higher prices, McVitie's faces a structural revenue problem harder to solve than a tax efficiency issue.</div>
+      </div>
+      <div class="conclusion"><h3>🎯 Strongest Conclusion</h3><p>Sugar levy is the greater long-term threat because it attacks revenue; corporation tax attacks profit but leaves revenue intact.</p></div>
+    </div>
+  </div>
+
+  <div id="t2q2" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 10 marks</strong>Definition → PEACH 1 (Corporation Tax, full with H extended into counterpoint) → PEACH 2 (Sugar Levy) → Conclusion</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — Corporation Tax</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A rise in corporation tax directly reduces McVitie's post-tax profit, limiting funds available for reinvestment.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">UK corporation tax rose to 25% in 2023 — a significant increase affecting all profitable UK manufacturers. As a large-scale biscuit producer, even a small % rise represents a large cash outflow.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">Reduced post-tax profit means less retained earnings for R&D, new product development or capital investment. This could slow McVitie's ability to innovate and respond to health trends.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">For Pladis as a multinational, higher UK corporation tax may incentivise shifting production or profit-booking to lower-tax jurisdictions.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, as a business with deep-rooted UK manufacturing, McVitie's cannot easily relocate. That said, Pladis has sophisticated tax planning strategies — transfer pricing may reduce the effective tax burden below the headline 25% rate.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH 2 — Sugar Levy</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">The potential extension of the sugar levy to biscuits would pose a significant threat to McVitie's revenue.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">The Soft Drinks Industry Levy was introduced in 2018 and faces lobbying for extension to biscuits. McVitie's core products — Digestives, Hobnobs, Jaffa Cakes — are high in sugar.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">McVitie's faces a dilemma: absorb the levy (squeezing margins) or pass it to consumers (risking demand loss). Biscuits have relatively elastic demand — many cheaper own-label substitutes exist.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">McVitie's already faces price pressure from supermarket own-label biscuits. A sugar levy accelerating the consumer shift to own-label would damage McVitie's market share.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, if the levy applies equally to all biscuit manufacturers, the competitive landscape shifts uniformly — reducing the relative disadvantage to McVitie's specifically.</div></div>
+      </div>
+    </div>
+    <div class="conclusion"><h3>Conclusion</h3><p>Taxation changes represent a significant threat to McVitie's profitability. Corporation tax rises reduce retained profit; the potential sugar levy threatens demand for its core product range. The greater long-term risk is the sugar levy — corporation tax affects profit but the sugar levy could fundamentally reshape consumer demand, hitting McVitie's at the revenue line rather than just the cost line.</p></div>
+  </div>
+
+  <div id="t3q2" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Direct Tax</td><td>A tax paid directly by a business or individual — e.g. corporation tax, income tax</td></tr>
+        <tr><td>Indirect Tax</td><td>A tax collected via the price of goods — e.g. VAT, sugar levy, import tariffs</td></tr>
+        <tr><td>Corporation Tax</td><td>Tax on business profits — currently 25% in the UK; directly reduces retained profit</td></tr>
+        <tr><td>VAT</td><td>20% tax on most goods and services — processed confectionery is subject to VAT</td></tr>
+        <tr><td>Sugar Levy</td><td>Tax on high-sugar products — currently applies to soft drinks; lobbying to extend to confectionery</td></tr>
+        <tr><td>Import Tariff</td><td>Tax on imported goods — raises cost of raw materials like cocoa, sugar and nuts</td></tr>
+        <tr><td>Fiscal Policy</td><td>Government decisions on taxation and spending used to influence the economy</td></tr>
+        <tr><td>Transfer Pricing</td><td>MNCs shift profits between countries via internal pricing to minimise tax liability</td></tr>
+        <tr><td>Disposable Income</td><td>Income remaining after taxes — determines consumer spending on non-essentials like confectionery</td></tr>
+        <tr><td>Price Elasticity of Demand</td><td>Measures how responsive demand is to a price change — relevant when sugar levy forces price rises</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="t4q2" class="tab-content">
+    <div class="highlight gold"><strong>🎯 Top Tip</strong>The sugar levy vs corporation tax debate is the core evaluation point — always argue which is more damaging and WHY.</div>
+    <div class="highlight teal"><strong>🎯 Link to PED</strong>Mention price elasticity of demand — biscuits have elastic demand (many substitutes), so passing on a sugar levy through higher prices risks significant revenue loss.</div>
+    <div class="highlight blue"><strong>🎯 Multinational Advantage</strong>Pladis can use transfer pricing to mitigate corporation tax — this is a strong H point showing sophisticated knowledge of MNC tax strategies.</div>
+    <div class="highlight gold"><strong>Structure — 10 marks</strong>Definition → Full PEACH 1 with extended H counterpoint → PEACH 2 → Conclusion taking a clear position on which tax matters most.</div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q2</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q2-topic" onclick="togglePageCheck('q2-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q2-peach" onclick="togglePageCheck('q2-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q2-terms" onclick="togglePageCheck('q2-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q2-done" onclick="togglePageCheck('q2-done');toggleProgress('q2')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q2 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 PAGE -->
+<div id="page-q3" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section A · Q3 · 12 Marks · Topics 4.4.1, 4.1.1</div>
+    <h1>Pladis & Nigeria</h1>
+    <div class="meta">
+      <span class="tag tag-marks">12 Marks</span>
+      <span class="tag tag-topic">4.4.1 Impact of MNCs</span>
+      <span class="tag tag-type">Definition + 2× PEACH + Conclusion</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess the impact of the multinational company Pladis on the economy of Nigeria."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q3')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q3')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q3')">📖 Key Terms</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4q3')">💡 Exam Tips</button>
+  </div>
+
+  <div id="t1q3" class="tab-content active">
+    <div class="content-block">
+      <h2>🌍 Key Context — Pladis & Nigeria</h2>
+      <div class="two-col">
+        <div>
+          <h3>Pladis</h3>
+          <ul>
+            <li>Global snacking company owned by Yıldız Holding (Turkey)</li>
+            <li>Operates in 120+ countries</li>
+            <li>Brands: McVitie's, Godiva, Ulker</li>
+            <li>Sources cocoa from Nigeria and West Africa</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Nigeria</h3>
+          <ul>
+            <li>MINT emerging economy</li>
+            <li>~220 million population; rapidly growing middle class</li>
+            <li>One of world's largest cocoa producers</li>
+            <li>Developing economy — relies on commodity exports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ Positive Impacts</h2>
+        <h3>Employment</h3>
+        <ul>
+          <li>Direct jobs in cocoa farming, processing, logistics</li>
+          <li>Raises household incomes → multiplier effect</li>
+          <li>Local spending supports other businesses</li>
+        </ul>
+        <h3>Skills & Technology Transfer</h3>
+        <ul>
+          <li>Modern agricultural techniques shared</li>
+          <li>Local workforce becomes more productive long-term</li>
+        </ul>
+        <h3>GDP & Tax Revenue</h3>
+        <ul>
+          <li>Local sourcing adds to Nigerian economic output</li>
+          <li>Corporation tax revenues fund public services</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>⚠️ Negative Impacts</h2>
+        <h3>Profit Repatriation</h3>
+        <ul>
+          <li>Profits flow to Turkish shareholders, not reinvested locally</li>
+          <li>Long-term balance of payments damage</li>
+          <li>Nigeria captures limited long-term value</li>
+        </ul>
+        <h3>Low Wages / Exploitation</h3>
+        <ul>
+          <li>Buyer power drives down cocoa prices paid to farmers</li>
+          <li>Farmers may remain in poverty despite supplying a global brand</li>
+        </ul>
+        <h3>Tax Avoidance</h3>
+        <ul>
+          <li>Transfer pricing shifts profits to lower-tax jurisdictions</li>
+          <li>Nigeria loses corporation tax revenue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q3" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 12 marks</strong>Definition of MNC → PEACH 1 (positive impact) → PEACH 2 (negative impact) → Conclusion</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — Positive Impact</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Pladis creates employment and stimulates economic activity in Nigeria through its supply chain operations.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Nigeria is one of the world's largest cocoa producers and Pladis sources cocoa as a key ingredient. By sourcing locally, Pladis creates jobs across Nigeria's agricultural supply chain — from cocoa farming to processing and logistics.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This raises household incomes for Nigerian workers, increasing consumer spending power and contributing to Nigeria's GDP through a multiplier effect.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Nigeria is a MINT emerging economy with a rapidly growing population. MNC investment supports broader economic development goals — raising living standards in cocoa-producing regions.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, wages in cocoa supply chains are often extremely low. If Pladis uses buyer power to keep cocoa prices low, the employment created may not meaningfully improve living standards, raising ethical concerns.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH 2 — Negative Impact</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Pladis may repatriate profits back to its home country rather than reinvesting in Nigeria, reducing the long-term economic benefit to the host economy.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Pladis is ultimately owned by Yıldız Holding, a Turkish conglomerate. Profits generated through Nigerian cocoa sourcing flow back to Turkish shareholders as dividends — not into the Nigerian economy.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">Nigeria's balance of payments suffers in the long run. While FDI inflows are positive initially, sustained profit repatriation year on year means the host country eventually loses more than it gains.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Nigeria already faces profit outflows from foreign corporations in its oil sector. The confectionery supply chain adds another dimension — resource extraction (cocoa) with limited value retained domestically.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, Pladis's operations do generate corporation tax revenues for Nigeria funding public services. Additionally, technology transfer may improve long-term agricultural productivity beyond the immediate relationship.</div></div>
+      </div>
+    </div>
+    <div class="conclusion"><h3>Conclusion</h3><p>On balance, Pladis brings genuine short-term economic benefits — employment, income, GDP contribution and tax revenue. However, the long-term impact is ambiguous. Profit repatriation, low wages and limited domestic value creation suggest Nigeria captures only a fraction of the value generated by its cocoa resources. The net benefit depends on whether Pladis sources ethically, pays fair prices to farmers and invests meaningfully in local skills.</p></div>
+  </div>
+
+  <div id="t3q3" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>MNC</td><td>A firm with headquarters in one country and branches or production plants in others</td></tr>
+        <tr><td>FDI</td><td>Investment by a foreign company into the host country's economy — positive short-term but profits may be repatriated</td></tr>
+        <tr><td>Profit Repatriation</td><td>When an MNC sends profits earned in the host country back to its home country</td></tr>
+        <tr><td>Multiplier Effect</td><td>Initial injection of spending generates additional rounds of spending in the local economy</td></tr>
+        <tr><td>Balance of Payments</td><td>Record of all financial transactions between a country and the rest of the world</td></tr>
+        <tr><td>MINT Economies</td><td>Emerging economies: Mexico, Indonesia, Nigeria, Turkey</td></tr>
+        <tr><td>Transfer Pricing</td><td>MNCs shift profits between countries via internal pricing to minimise tax in host countries</td></tr>
+        <tr><td>Technology Transfer</td><td>When MNCs bring modern techniques to host countries, improving local productivity long-term</td></tr>
+        <tr><td>GDP per Capita</td><td>GDP divided by population — measures living standards; Nigeria's is relatively low</td></tr>
+        <tr><td>Buyer Power</td><td>Ability of large buyer (Pladis) to force down prices paid to suppliers — keeps cocoa farmer wages low</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="t4q3" class="tab-content">
+    <div class="highlight gold"><strong>🎯 Key Eval Point</strong>FDI is positive short-term but negative long-term as profits are repatriated. This is the most sophisticated point in this answer.</div>
+    <div class="highlight teal"><strong>🎯 MINT Context</strong>Always mention Nigeria as a MINT economy — this shows you understand the broader globalisation context and emerging market significance.</div>
+    <div class="highlight blue"><strong>🎯 Conclusion Direction</strong>The answer should conclude that short-term benefits are real but long-term impact depends on ethical sourcing and government regulation — a nuanced, evaluative judgement.</div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q3</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q3-topic" onclick="togglePageCheck('q3-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q3-peach" onclick="togglePageCheck('q3-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q3-terms" onclick="togglePageCheck('q3-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q3-done" onclick="togglePageCheck('q3-done');toggleProgress('q3')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q3 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q4 PAGE -->
+<div id="page-q4" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section A · Q4 · 20 Marks ⭐ · Topic 3.3.2</div>
+    <h1>Investment Appraisal</h1>
+    <div class="meta">
+      <span class="tag tag-marks">20 Marks ⭐</span>
+      <span class="tag tag-topic">3.3.2 Investment Appraisal</span>
+      <span class="tag tag-type">Define + 4× PEACH + MOPS</span>
+    </div>
+  </div>
+  <div class="question-box">"Using Extract D, evaluate both projects using ARR and NPV methods and recommend which one."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q4')">📋 Methods</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q4')">✍️ Answer Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q4')">📖 Key Terms</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4q4')">💡 Exam Tips</button>
+  </div>
+
+  <div id="t1q4" class="tab-content active">
+    <div class="content-block">
+      <h2>📈 Method 1: Payback Period</h2>
+      <p>How long it takes for an investment to pay for itself from net returns. Businesses want the SHORTEST payback.</p>
+      <div class="formula">Payback = Sum Invested ÷ Net Cash per Time Period (equal flows)</div>
+      <h3>Unequal Cash Flows (most common in exams)</h3>
+      <ul>
+        <li>Deduct each year's return from outstanding balance until zero</li>
+        <li>Remaining fraction: (Remaining ÷ Next year's cash flow) × 12 = months</li>
+        <li>Example: £50k invested, Y1=£13k, Y2=£28k, Y3=£27k → Payback = 2 years 4 months</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h2>📈 Method 2: Average Rate of Return (ARR) ⭐</h2>
+      <p>Average annual profit as a % of the initial investment. Businesses want the HIGHEST ARR %.</p>
+      <div class="formula">ARR = (Average Annual Profit ÷ Initial Outlay) × 100</div>
+      <div class="structure-steps">
+        <div class="structure-step"><div class="step-num">1</div><div class="step-text">Total profit = Total returns MINUS initial investment</div></div>
+        <div class="structure-step"><div class="step-num">2</div><div class="step-text">Average annual profit = Total profit ÷ Number of years</div></div>
+        <div class="structure-step"><div class="step-num">3</div><div class="step-text">ARR = (Average annual profit ÷ Initial outlay) × 100</div></div>
+      </div>
+      <div class="highlight gold" style="margin-top:1rem"><strong>Worked Example</strong>Investment £20k. Returns £10k/year for 5 years. Total profit = £30k. Annual avg = £6k. ARR = (£6k ÷ £20k) × 100 = 30%</div>
+    </div>
+    <div class="content-block">
+      <h2>📈 Method 3: Net Present Value (NPV) ⭐</h2>
+      <p>Present-day value of all future cash flows minus the initial investment. Businesses want POSITIVE NPV — higher is better.</p>
+      <div class="formula">NPV = Sum of (Cash Flow × Discount Factor) for each year − Initial Investment</div>
+      <div class="structure-steps">
+        <div class="structure-step"><div class="step-num">1</div><div class="step-text">Multiply each year's cash flow by the discount factor given in the table</div></div>
+        <div class="structure-step"><div class="step-num">2</div><div class="step-text">Sum all discounted cash flows</div></div>
+        <div class="structure-step"><div class="step-num">3</div><div class="step-text">Subtract the initial investment</div></div>
+        <div class="structure-step"><div class="step-num">4</div><div class="step-text">Positive NPV = worthwhile; Negative NPV = not worthwhile</div></div>
+      </div>
+      <div class="two-col" style="margin-top:1rem">
+        <div class="highlight teal"><strong>Advantages of NPV</strong>Most sophisticated; accounts for time value of money; most accurate for large capital decisions</div>
+        <div class="highlight red"><strong>Disadvantages of NPV</strong>Complex; relies on accurate discount rate; if rates change, NPV figure becomes misleading</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q4" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 20 marks</strong>Define ARR + NPV → PEACH 1 (Project A ARR) → PEACH 2 (Project A NPV) → PEACH 3 (Project B ARR) → PEACH 4 (Project B NPV) → MOPS Conclusion</div>
+    <div class="content-block">
+      <h2>PEACH Template — Fill in from Extract D</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Project [A/B]'s ARR of [X]% indicates the average annual return — compare to bank interest rate and other project to judge value.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Show calculation: Total profit ÷ years = annual avg → ARR = (annual avg ÷ outlay) × 100. Always write formula first, then substitute numbers.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">If ARR exceeds bank interest rate, the investment is financially worthwhile. A higher ARR suggests strong average annual profitability relative to cost.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">For McVitie's/Pladis, capital investment must generate returns that justify the opportunity cost — funds tied up cannot be used elsewhere.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, ARR uses averages and ignores timing of cash flows. If returns are back-loaded, the average looks attractive but early years may create cash flow pressure — a significant weakness of this method.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🏁 MOPS Conclusion Template</h2>
+      <div class="mops-card">
+        <div class="mops-item"><div class="mops-letter">M</div><div class="mops-name">Most Important</div><div class="mops-text">On the basis of both ARR and NPV, Project [A/B] is recommended as it offers the higher ARR of [X]% and the higher positive NPV of [£X].</div></div>
+        <div class="mops-item"><div class="mops-letter">O</div><div class="mops-name">Other Factors</div><div class="mops-text">However, Project [A/B] may offer advantages in payback speed / lower initial outlay — relevant if Pladis has cash flow constraints.</div></div>
+        <div class="mops-item"><div class="mops-letter">P</div><div class="mops-name">Proviso</div><div class="mops-text">This assumes the discount rate used in NPV remains appropriate. If interest rates rise significantly, the NPV figures would change.</div></div>
+        <div class="mops-item"><div class="mops-letter">S</div><div class="mops-name">Short vs Long</div><div class="mops-text">Short term: quicker payback reduces risk. Long term: higher NPV creates more shareholder value — Pladis should prioritise long-term value creation.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t3q4" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Investment Appraisal</td><td>A scientific, quantitative approach to evaluating the financial consequences of an investment</td></tr>
+        <tr><td>Payback Period</td><td>Time it takes for an investment to pay for itself from net returns — businesses want shortest payback</td></tr>
+        <tr><td>ARR</td><td>Average annual profit as a % of initial investment — formula: (Average Annual Profit ÷ Initial Outlay) × 100</td></tr>
+        <tr><td>NPV</td><td>Present-day value of all future cash flows minus initial investment — positive NPV = worthwhile</td></tr>
+        <tr><td>Discount Factor</td><td>Multiplier applied to future cash flows — reflects that money today is worth more than money in the future</td></tr>
+        <tr><td>Time Value of Money</td><td>£1 today is worth more than £1 in the future due to inflation, opportunity cost and risk</td></tr>
+        <tr><td>Net Cash Flow</td><td>Cash inflows minus cash outflows in a given period</td></tr>
+        <tr><td>Opportunity Cost</td><td>Value of the next best alternative foregone — capital tied up cannot be used elsewhere</td></tr>
+        <tr><td>Capital Expenditure</td><td>Spending on long-term assets — what investment appraisal is used to evaluate</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="t4q4" class="tab-content">
+    <div class="highlight gold"><strong>🎯 Golden Rule 1</strong>Write the FORMULA FIRST before substituting numbers. Even if the final answer is wrong, method marks are awarded for correct formula and working.</div>
+    <div class="highlight teal"><strong>🎯 Golden Rule 2</strong>Always INTERPRET after calculating: "This ARR of X% exceeds the current bank base rate, suggesting the investment is financially worthwhile."</div>
+    <div class="highlight blue"><strong>🎯 Golden Rule 3</strong>Evaluate the METHOD itself: "However, ARR does not account for the timing of cash flows — a weakness when comparing projects with different return profiles."</div>
+    <div class="highlight red"><strong>🎯 Golden Rule 4</strong>Your MOPS conclusion MUST make a clear recommendation. Be decisive — state which project and why. Do not sit on the fence.</div>
+    <div class="highlight gold"><strong>🎯 Qualitative Factors</strong>Even after calculating, mention qualitative factors: strategic fit, employee impact, environmental credentials, market conditions. This shows depth of analysis beyond the numbers.</div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q4</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q4-topic" onclick="togglePageCheck('q4-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied all three investment appraisal methods</span></div>
+      <div class="page-check-item" id="pci-q4-peach" onclick="togglePageCheck('q4-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I can write the ARR and NPV formulae from memory</span></div>
+      <div class="page-check-item" id="pci-q4-terms" onclick="togglePageCheck('q4-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q4-done" onclick="togglePageCheck('q4-done');toggleProgress('q4')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q4 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 PAGE -->
+<div id="page-q5" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section B · Q5 · 8 Marks · Topics 1.5.4, 2.1.3</div>
+    <h1>Private Limited Company (Ltd)</h1>
+    <div class="meta">
+      <span class="tag tag-marks">8 Marks</span>
+      <span class="tag tag-topic">1.5.4 Forms of Business</span>
+      <span class="tag tag-type">Definition + 2× PEACH</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess two possible benefits to Lottie Shaw's of operating as a private limited company (Ltd)."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q5')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q5')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q5')">📖 Key Terms</button>
+  </div>
+
+  <div id="t1q5" class="tab-content active">
+    <div class="content-block">
+      <h2>📋 Forms of Business — Know All Types</h2>
+      <div class="two-col">
+        <div>
+          <h3>Sole Trader</h3>
+          <ul><li>One owner, full control</li><li>Unlimited liability — personal assets at risk</li><li>Difficult to raise large capital</li></ul>
+          <h3>Partnership</h3>
+          <ul><li>2-20 partners, shared responsibility</li><li>Unlimited liability (unless LLP)</li></ul>
+        </div>
+        <div>
+          <h3>Ltd ⭐ THE FOCUS</h3>
+          <ul><li>Shares sold privately to known individuals</li><li>Limited liability for all shareholders</li><li>Share transfers require existing shareholder approval</li><li>Must file accounts at Companies House</li><li>Separate legal identity from owners</li></ul>
+          <h3>PLC</h3>
+          <ul><li>Shares traded publicly on stock exchange</li><li>Can raise very large capital but heavy regulation</li><li>Risk of hostile takeover</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ Benefit 1 — Limited Liability</h2>
+        <p>Shareholders can only lose the amount they invested — personal assets (home, savings) are protected if the business fails.</p>
+        <ul>
+          <li>Expanding into a new bakery involves significant financial risk</li>
+          <li>Encourages owners to take calculated risks and invest</li>
+          <li>More willing to borrow when personal exposure is capped</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>✅ Benefit 2 — Access to Finance</h2>
+        <ul>
+          <li>Can sell shares to angel investors or private equity</li>
+          <li>Share transfers require existing shareholder approval — control maintained</li>
+          <li>Equity finance — no repayment required, no interest</li>
+          <li>Banks more willing to lend to a Ltd company</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q5" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 8 marks</strong>Definition of Ltd → PEACH 1 (limited liability) → PEACH 2 (access to finance). No conclusion. Strong H in each paragraph.</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — Limited Liability</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Operating as a Ltd gives Lottie Shaw's owners limited liability, protecting their personal assets if the business encounters financial difficulty.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Unlike a sole trader where the owner could lose their home, Ltd shareholders can only lose the amount invested in shares. With Lottie Shaw's investing in a costly new bakery, the financial risk of this expansion is significant.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">Limited liability reduces personal financial risk, making owners more willing to take calculated risks — such as borrowing to fund the new bakery — knowing personal assets remain protected. This encourages entrepreneurial investment and growth.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">For a small Yorkshire artisan bakery expanding into a new bakery facility, limited liability makes such growth decisions less personally threatening for the founding owners.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, Ltd status requires more complex accounting, auditing and reporting obligations. For a small business like Lottie Shaw's, these additional administrative costs and compliance requirements partially offset the benefit.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH 2 — Access to Finance</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Ltd status allows Lottie Shaw's to raise finance by selling shares to new investors, without losing full control of the business.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">As a Ltd, Lottie Shaw's can bring in external shareholders — angel investors or private equity — to provide capital. Crucially, share transfers require approval of existing shareholders, so founders retain control over who joins.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This provides equity finance — capital that does not need to be repaid and carries no interest cost — making it potentially less financially risky than a bank loan for the new bakery.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Given the significant cost of a new bakery and the high interest rate environment, equity finance via share issue may be more sustainable for Lottie Shaw's than taking on substantial debt.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, issuing new shares dilutes the existing owners' percentage stake and profit share. New shareholders expect returns — either through dividends or share value growth — creating a long-term obligation. The loss of some control may concern a family-run artisan business.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t3q5" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Private Limited Company (Ltd)</td><td>Business where ownership is divided into private shares — shares cannot be sold to the public on a stock exchange</td></tr>
+        <tr><td>Limited Liability</td><td>Shareholders can only lose their invested amount — personal assets (home, savings) are protected</td></tr>
+        <tr><td>Unlimited Liability</td><td>Owner personally responsible for ALL debts — personal assets can be seized by creditors</td></tr>
+        <tr><td>Shareholder</td><td>Individual or organisation that owns shares — entitled to dividends and voting rights</td></tr>
+        <tr><td>Share Issue</td><td>Raising finance by selling new shares — no repayment required but ownership is diluted</td></tr>
+        <tr><td>Dilution of Ownership</td><td>When new shares issued, existing owners' % stake falls — reduces share of profits and voting power</td></tr>
+        <tr><td>Separate Legal Identity</td><td>A Ltd company is legally distinct from its owners — can own assets and be sued in its own name</td></tr>
+        <tr><td>Angel Investor</td><td>Wealthy individual investing in small businesses in exchange for equity stake</td></tr>
+        <tr><td>Dividend</td><td>Share of company profit paid to shareholders — the return shareholders expect on investment</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q5</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q5-topic" onclick="togglePageCheck('q5-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q5-peach" onclick="togglePageCheck('q5-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q5-terms" onclick="togglePageCheck('q5-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q5-done" onclick="togglePageCheck('q5-done');toggleProgress('q5')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q5 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 PAGE -->
+<div id="page-q6" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section B · Q6 · 10 Marks · Topics 2.1.2, 2.3.2</div>
+    <h1>Bank Loan Finance</h1>
+    <div class="meta">
+      <span class="tag tag-marks">10 Marks</span>
+      <span class="tag tag-topic">2.1.2 External Finance</span>
+      <span class="tag tag-type">Definition + PEACH + Conclusion</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess the value of a bank loan for Lottie Shaw's as a method of raising finance for its new bakery."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q6')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q6')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q6')">📖 Key Terms</button>
+  </div>
+
+  <div id="t1q6" class="tab-content active">
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ FOR Bank Loan</h2>
+        <ul>
+          <li>Immediate lump sum — ideal for capital expenditure (bakery build)</li>
+          <li>Spreads cost over useful life of asset</li>
+          <li>Ownership and control retained — no new shareholders</li>
+          <li>Predictable monthly repayments aid cash flow planning</li>
+          <li>Interest payments are tax deductible — reduces actual cost</li>
+          <li>Builds credit history for future borrowing</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>⚠️ AGAINST Bank Loan</h2>
+        <ul>
+          <li>Interest cost makes total repayment exceed loan value</li>
+          <li>High UK interest rates post-2022 make borrowing expensive</li>
+          <li>Fixed repayments create cash flow pressure — must be paid in quiet periods</li>
+          <li>Collateral required — assets at risk if default</li>
+          <li>Worsens gearing ratio (increases financial risk)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>⚡ Interest Rate Context — Critical!</h2>
+      <ul>
+        <li>Bank of England raised rates sharply from 2022 to control inflation</li>
+        <li>Rates reached 5.25% — highest in 15 years</li>
+        <li>A £500,000 loan at 7% over 15 years costs far more than the same loan at 2%</li>
+        <li>This context MUST be mentioned to score top marks</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h2>💡 Alternatives to Consider</h2>
+      <div class="two-col">
+        <ul>
+          <li><strong>Retained profit</strong> — no cost, but may be insufficient</li>
+          <li><strong>Share issue</strong> — no repayment, but dilutes ownership</li>
+        </ul>
+        <ul>
+          <li><strong>Government grants</strong> — free capital for small food businesses</li>
+          <li><strong>William Jacksons parent funding</strong> — internal capital at lower cost</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q6" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 10 marks</strong>Definition of bank loan → PEACH 1 (FOR) with H extended into counterpoint → PEACH 2 (alternatives) → Conclusion</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — FOR the Bank Loan</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A bank loan provides Lottie Shaw's with an immediate lump sum specifically suited to large, one-off capital expenditure like a new bakery.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Building or fitting out a new bakery requires significant upfront investment in property and industrial equipment — costs that cannot easily be covered from retained profit for a small artisan business. A 10-15 year loan spreads repayment over the useful life of the asset.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This allows Lottie Shaw's to invest now and generate returns from the new bakery while repaying — using future revenue to fund the investment. Predictable monthly repayments make cash flow planning straightforward.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Lottie Shaw's is a small Yorkshire artisan bakery with limited retained profits. A bank loan allows access to capital at a scale impossible from internal sources alone — enabling growth otherwise unachievable.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, in the current high interest rate environment (rates reached 5.25%), the total cost of borrowing is substantially higher than in the 2010s. Fixed repayments create cash flow pressure during seasonal quiet periods — if revenue falls short, loan repayments must still be met, risking default and loss of collateral.</div></div>
+      </div>
+    </div>
+    <div class="conclusion"><h3>Conclusion</h3><p>A bank loan has genuine value as it provides the scale of capital required that internal sources cannot match. However, in the current high-interest environment, the cost is significant and fixed repayments create cash flow risk for a seasonal business. The value depends on Lottie Shaw's existing cash flow strength, the interest rate negotiated, and whether alternative sources are available. A blended finance approach (retained profit + grant + smaller loan) would be ideal.</p></div>
+  </div>
+
+  <div id="t3q6" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Bank Loan</td><td>Fixed sum borrowed from a bank, repaid over an agreed period with interest — suitable for long-term capital expenditure</td></tr>
+        <tr><td>Internal Finance</td><td>Finance from within the business — e.g. retained profit — no cost or repayment obligation</td></tr>
+        <tr><td>External Finance</td><td>Finance from outside the business — e.g. bank loans, share issues, grants</td></tr>
+        <tr><td>Retained Profit</td><td>Profit kept in the business rather than paid as dividends — cheapest source of finance</td></tr>
+        <tr><td>Equity Finance</td><td>Raising capital by selling shares — no repayment required but ownership is shared</td></tr>
+        <tr><td>Debt Finance</td><td>Raising capital by borrowing — must be repaid with interest</td></tr>
+        <tr><td>Collateral</td><td>Asset pledged as security against a loan — seized by lender if borrower defaults</td></tr>
+        <tr><td>Gearing</td><td>Proportion of business funded by long-term debt — formula: (Non-Current Liabilities ÷ Capital Employed) × 100</td></tr>
+        <tr><td>Liquidity</td><td>Ability to meet short-term financial obligations — poor liquidity risks insolvency even if profitable</td></tr>
+        <tr><td>Overtrading</td><td>Growing faster than cash flow can support — profitable but runs out of cash</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q6</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q6-topic" onclick="togglePageCheck('q6-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q6-peach" onclick="togglePageCheck('q6-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q6-terms" onclick="togglePageCheck('q6-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q6-done" onclick="togglePageCheck('q6-done');toggleProgress('q6')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q6 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 PAGE -->
+<div id="page-q7" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section B · Q7 · 12 Marks · Topics 4.1.5, 4.1.4</div>
+    <h1>UK-EU Trade Deal</h1>
+    <div class="meta">
+      <span class="tag tag-marks">12 Marks</span>
+      <span class="tag tag-topic">4.1.5 Trading Blocs</span>
+      <span class="tag tag-type">Definition + 2× PEACH + Conclusion</span>
+    </div>
+  </div>
+  <div class="question-box">"Assess the effect on Lottie Shaw's of the UK's trade deal with the EU trading bloc."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q7')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q7')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q7')">📖 Key Terms</button>
+  </div>
+
+  <div id="t1q7" class="tab-content active">
+    <div class="content-block">
+      <h2>🌍 Key Context</h2>
+      <div class="two-col">
+        <div>
+          <h3>EU Single Market</h3>
+          <ul><li>27 member states, ~450 million consumers</li><li>Free movement of goods, services, capital and people</li><li>UK left in 2020 (Brexit)</li><li>UK-EU Trade and Cooperation Agreement (TCA) — zero tariffs IF rules of origin met</li></ul>
+        </div>
+        <div>
+          <h3>Lottie Shaw's Context</h3>
+          <ul><li>Small Yorkshire artisan bakery — primarily domestic focus</li><li>Premium positioning — potential for European premium food market</li><li>Parent: William Jacksons — may provide export support</li><li>Limited management capacity for compliance burden</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ Positive Effects</h2>
+        <h3>Export Opportunity</h3>
+        <ul>
+          <li>Reduced tariffs on UK food exports opens European market</li>
+          <li>EU consumers in France, Germany pay premium for British artisan food</li>
+          <li>Yorkshire heritage is a marketable story in European premium markets</li>
+          <li>E-commerce allows SMEs to reach EU consumers directly</li>
+        </ul>
+        <h3>Import Cost Reduction</h3>
+        <ul>
+          <li>Cheaper EU ingredients (butter, nuts, flour) lowers input costs</li>
+          <li>Improves gross profit margin</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>⚠️ Negative Effects</h2>
+        <h3>Increased Competition</h3>
+        <ul>
+          <li>Belgian chocolate, French patisserie, German biscuits become more price-competitive in UK</li>
+          <li>Intensifies competition in Lottie Shaw's core domestic market</li>
+        </ul>
+        <h3>Regulatory Burden</h3>
+        <ul>
+          <li>Dual regulatory compliance (UK + EU standards) costly and complex</li>
+          <li>Rules of origin — ingredients from outside UK/EU may not qualify</li>
+          <li>Currency risk if selling in euros</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q7" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 12 marks</strong>Definition of trading bloc → PEACH 1 (positive effect) → PEACH 2 (negative effect) → Conclusion</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — Positive Effect</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A UK-EU trade deal that reduces tariffs on food exports could open significant new markets for Lottie Shaw's products across Europe.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">A favourable trade deal restoring reduced-tariff access allows Lottie Shaw's to export its premium biscuits to European consumers — particularly in France and Germany where British artisan food commands premium pricing.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">Access to the EU's 450 million consumers represents a Market Development opportunity (Ansoff) — existing products, new markets. Even a small share of European premium biscuit demand could significantly boost revenue.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Lottie Shaw's Yorkshire heritage positioning — handmade, quality ingredients — suits European premium food markets where British artisan products command above-average prices.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, exporting to the EU requires compliance with EU food labelling, allergen and packaging regulations. The administrative burden of navigating dual regulatory requirements could be disproportionately costly for a small business, limiting the practical benefit.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH 2 — Negative Effect</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A UK-EU trade deal also increases competition in the UK domestic market by making it easier for EU producers to export to the UK.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">The EU has major confectionery and bakery producers — Belgian chocolate, French patisserie, German biscuits — that benefit from reduced UK tariffs. With trade barriers lowered, these become more price-competitive in UK supermarkets.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This intensifies competition for Lottie Shaw's in its core UK market. Lottie Shaw's faces increased pressure on both volume and pricing — particularly in the premium gifting segment.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">Lottie Shaw's is small and predominantly domestically focused. Unlike a multinational, it lacks resources to compete on a pan-European scale. The competitive threat from EU imports is more immediately felt than any export opportunity.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, Lottie Shaw's Yorkshire heritage story and local provenance are difficult for EU competitors to replicate. Consumers who value local British provenance are unlikely to switch simply because import tariffs fall — the threat may be more limited in practice than in theory.</div></div>
+      </div>
+    </div>
+    <div class="conclusion"><h3>Conclusion</h3><p>The net effect is likely modestly negative in the short term. As a small, domestically-focused business, Lottie Shaw's is more exposed to EU import competition than positioned to capitalise on European export opportunities. However, long-term, its premium Yorkshire heritage brand has genuine European potential — if it can navigate the regulatory requirements.</p></div>
+  </div>
+
+  <div id="t3q7" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Trading Bloc</td><td>Group of countries that agree to reduce or remove trade barriers between them</td></tr>
+        <tr><td>EU Single Market</td><td>Trading area with free movement of goods, services, capital and people — eliminates tariff and non-tariff barriers</td></tr>
+        <tr><td>Tariff</td><td>Tax on imported goods — raises price of imports, making them less competitive</td></tr>
+        <tr><td>Protectionism</td><td>Government policies designed to restrict imports and protect domestic industries</td></tr>
+        <tr><td>Trade Liberalisation</td><td>Removal of trade barriers — reduces costs for importers and opens markets for exporters</td></tr>
+        <tr><td>Rules of Origin</td><td>Requirements that goods must contain minimum % of content from within a trade area to qualify for zero tariffs</td></tr>
+        <tr><td>Non-Tariff Barrier</td><td>Trade restrictions other than tariffs — e.g. regulatory standards, customs checks, labelling requirements</td></tr>
+        <tr><td>Exchange Rate</td><td>Price of one currency in another — affects competitiveness of exports and cost of imports</td></tr>
+        <tr><td>Brexit</td><td>UK's exit from EU in 2020 — ended free movement and created new trade friction</td></tr>
+        <tr><td>Market Development (Ansoff)</td><td>Growth strategy selling existing products to new markets — trade deal export opportunity fits this</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q7</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q7-topic" onclick="togglePageCheck('q7-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q7-peach" onclick="togglePageCheck('q7-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied the PEACH paragraph plans</span></div>
+      <div class="page-check-item" id="pci-q7-terms" onclick="togglePageCheck('q7-terms')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I know all the key terms</span></div>
+      <div class="page-check-item" id="pci-q7-done" onclick="togglePageCheck('q7-done');toggleProgress('q7')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q7 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 PAGE -->
+<div id="page-q8" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Section B · Q8 · 20 Marks ⭐ · Topics 3.2, 1.3.4</div>
+    <h1>Growth Strategy</h1>
+    <div class="meta">
+      <span class="tag tag-marks">20 Marks ⭐</span>
+      <span class="tag tag-topic">3.2 Growth / 1.3.4 Distribution</span>
+      <span class="tag tag-type">Define Both + 4× PEACH + MOPS</span>
+    </div>
+  </div>
+  <div class="question-box">"William Jacksons has set the objective of expanding Lottie Shaw's by increasing the distribution of its products built on a multi-channel approach OR by producing own-label biscuits."</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'t1q8')">📋 Topic Revision</button>
+    <button class="tab-btn" onclick="switchTab(this,'t2q8')">✍️ PEACH Plan</button>
+    <button class="tab-btn" onclick="switchTab(this,'t3q8')">🏁 MOPS Conclusion</button>
+    <button class="tab-btn" onclick="switchTab(this,'t4q8')">📖 Key Terms</button>
+  </div>
+
+  <div id="t1q8" class="tab-content active">
+    <div class="two-col">
+      <div class="content-block">
+        <h2>📦 Option 1: Multi-Channel Distribution</h2>
+        <p>Selling through multiple routes to market simultaneously.</p>
+        <h3>Available Channels</h3>
+        <ul>
+          <li>Own website / e-commerce (DTC)</li>
+          <li>Online marketplaces (Not On The High Street, Etsy)</li>
+          <li>Independent retailers, farm shops, delis</li>
+          <li>Regional supermarkets (Booths, Waitrose)</li>
+          <li>Subscription gifting boxes</li>
+          <li>Wholesale to hospitality</li>
+        </ul>
+        <h3>Ansoff: Market Development</h3>
+        <p>Existing products, new markets. Medium risk.</p>
+      </div>
+      <div class="content-block">
+        <h2>🏪 Option 2: Own-Label Production</h2>
+        <p>Manufacturing products sold under a retailer's brand name.</p>
+        <h3>How It Works</h3>
+        <ul>
+          <li>Retailer specifies product; Lottie Shaw's manufactures it</li>
+          <li>Sold under retailer's label (e.g. Waitrose, M&S)</li>
+          <li>Fixed price per unit — typically low margin</li>
+          <li>High guaranteed volumes</li>
+        </ul>
+        <h3>Ansoff: Product + Market Development</h3>
+        <p>New product variant, potentially new customer base. Medium-high risk.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h2>✅ Multi-Channel Advantages</h2>
+        <ul>
+          <li>Reaches far more customers nationally</li>
+          <li>Builds brand equity — Lottie Shaw's name visible everywhere</li>
+          <li>Diversifies revenue — less dependency on single channel</li>
+          <li>E-commerce has low marginal cost once set up</li>
+          <li>Retains full pricing power</li>
+          <li>Supports long-term brand building</li>
+        </ul>
+        <h2 style="margin-top:1rem">⚠️ Multi-Channel Disadvantages</h2>
+        <ul>
+          <li>Operationally complex — different logistics per channel</li>
+          <li>Upfront investment in platform, packaging, fulfilment</li>
+          <li>Risk of overtrading alongside new bakery build</li>
+          <li>Channel conflict risk</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>✅ Own-Label Advantages</h2>
+        <ul>
+          <li>Guaranteed high-volume orders — predictable revenue</li>
+          <li>Immediate bakery capacity utilisation</li>
+          <li>Reduced marketing cost — retailer handles promotion</li>
+          <li>Cash flow security supports loan repayments</li>
+          <li>William Jacksons parent relationships facilitate contracts</li>
+        </ul>
+        <h2 style="margin-top:1rem">⚠️ Own-Label Disadvantages</h2>
+        <ul>
+          <li>Thin margins — retailer captures most value</li>
+          <li>Brand invisibility — Lottie Shaw's name disappears</li>
+          <li>Brand dilution risk if discovered by loyal customers</li>
+          <li>Single customer dependency risk</li>
+          <li>Contradicts artisan heritage USP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="t2q8" class="tab-content">
+    <div class="highlight gold"><strong>Structure — 20 marks</strong>Define multi-channel + own-label → PEACH 1 (MC: FOR) → PEACH 2 (MC: AGAINST) → PEACH 3 (OL: FOR) → PEACH 4 (OL: AGAINST) → MOPS Conclusion</div>
+    <div class="content-block">
+      <h2>🍑 PEACH 1 — Multi-Channel: FOR</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">A multi-channel strategy allows Lottie Shaw's to reach a significantly larger customer base, driving revenue growth without changing its core brand identity.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">Combining Yorkshire shops and website with online marketplaces like Not On The High Street or subscription gifting allows Lottie Shaw's to reach customers nationally who would never visit Yorkshire but value premium artisan products.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">This is Market Development (Ansoff) — reaching new customers with existing products. Each additional channel adds incremental revenue with low marginal cost once the new bakery is operational. Lottie Shaw's retains full pricing power across all channels.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">E-commerce and premium gifting platforms have created national demand for artisan food. Lottie Shaw's Yorkshire heritage story suits online storytelling through social media and DTC channels — which cost relatively little to establish.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, managing multiple channels simultaneously is operationally complex — different logistics, customer expectations and margin structures per channel. A small business may lack the management capacity to run multi-channel effectively without quality standards slipping.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h2>🍑 PEACH 3 — Own-Label: FOR</h2>
+      <div class="peach-card">
+        <div class="peach-row"><div class="peach-letter p-letter">P</div><div class="label">Point</div><div class="text">Own-label production provides Lottie Shaw's with guaranteed high-volume orders and stable, predictable revenue — directly supporting the financial case for the new bakery.</div></div>
+        <div class="peach-row"><div class="peach-letter e-letter">E</div><div class="label">Evidence</div><div class="text">A supply contract with Waitrose or M&S could provide guaranteed order volume that fills the new bakery's capacity immediately upon opening — eliminating demand uncertainty of a multi-channel approach.</div></div>
+        <div class="peach-row"><div class="peach-letter a-letter">A</div><div class="label">Analysis</div><div class="text">Predictable revenue makes it significantly easier to service the bank loan financing the new bakery. Higher production volumes reduce unit costs through economies of scale — improving margins even at lower own-label prices.</div></div>
+        <div class="peach-row"><div class="peach-letter c-letter">C</div><div class="label">Context</div><div class="text">William Jacksons as parent company likely has existing retailer relationships that could facilitate an own-label agreement — reducing commercial risk considerably versus a start-up seeking its first retail contract.</div></div>
+        <div class="peach-row"><div class="peach-letter h-letter">H</div><div class="label">Higher</div><div class="text">However, own-label contracts demand very thin margins — the retailer captures most consumer-facing value using buyer power to drive down supplier prices. Lottie Shaw's would be producing artisan-quality biscuits for a fraction of what it earns under its own brand — a poor use of premium capability long-term.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t3q8" class="tab-content">
+    <div class="content-block">
+      <h2>🏁 MOPS Conclusion</h2>
+      <div class="mops-card">
+        <div class="mops-item"><div class="mops-letter">M</div><div class="mops-name">Main Judgement</div><div class="mops-text">Multi-channel distribution is the stronger long-term strategy. It builds brand equity, diversifies revenue and aligns with growing consumer demand for authentic, direct brand relationships. The new bakery's capacity is best deployed amplifying the Lottie Shaw's brand — not invisibly filling a supermarket's own-label shelf.</div></div>
+        <div class="mops-item"><div class="mops-letter">O</div><div class="mops-name">Other Factors</div><div class="mops-text">Own-label offers compelling short-term advantages — guaranteed volume, predictable revenue and immediate bakery utilisation. These are not insignificant for a small business managing a major capital investment.</div></div>
+        <div class="mops-item"><div class="mops-letter">P</div><div class="mops-name">Proviso</div><div class="mops-text">If Lottie Shaw's primary short-term objective is financial stability and loan repayment security, own-label may be a necessary transitional strategy — provided it is time-limited and kept separate from the branded business. The recommendation changes if cash flow is constrained.</div></div>
+        <div class="mops-item"><div class="mops-letter">S</div><div class="mops-name">Short vs Long Term</div><div class="mops-text">Short term: own-label reduces financial risk. Long term: multi-channel builds a sustainable, premium brand with pricing power and customer loyalty. William Jacksons should prioritise the strategy that builds Lottie Shaw's long-term brand value.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t4q8" class="tab-content">
+    <div class="content-block">
+      <h2>📖 Key Terms</h2>
+      <table class="terms-table">
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Multi-Channel Distribution</td><td>Selling through multiple routes to market simultaneously — maximises customer reach</td></tr>
+        <tr><td>Own-Label Production</td><td>Manufacturing products sold under a retailer's brand — typically high volume, low margin</td></tr>
+        <tr><td>Direct to Consumer (DTC)</td><td>Selling directly to end customer without intermediaries — higher margin, builds brand</td></tr>
+        <tr><td>Ansoff Matrix</td><td>Strategic framework: market penetration, product development, market development, diversification</td></tr>
+        <tr><td>Market Development</td><td>Selling existing products to new markets — what multi-channel achieves for Lottie Shaw's</td></tr>
+        <tr><td>Brand Equity</td><td>Commercial value of a brand name — built through consistent quality; damaged by own-label association</td></tr>
+        <tr><td>Economies of Scale</td><td>Reductions in unit cost from increasing output — own-label delivers this through guaranteed high volumes</td></tr>
+        <tr><td>Buyer Power</td><td>Large retailer's ability to negotiate low prices from suppliers — squeezes own-label margins</td></tr>
+        <tr><td>Brand Dilution</td><td>When premium brand image is weakened — risk if Lottie Shaw's artisan brand linked to mass own-label</td></tr>
+        <tr><td>Channel Conflict</td><td>When different distribution channels compete — retailer objects if producer also sells direct online</td></tr>
+        <tr><td>USP</td><td>Unique Selling Point — Lottie Shaw's USP is Yorkshire artisan heritage, threatened by own-label</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="page-progress">
+    <h3>✅ My Progress — Q8</h3>
+    <div class="page-checklist">
+      <div class="page-check-item" id="pci-q8-topic" onclick="togglePageCheck('q8-topic')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've read the topic revision notes</span></div>
+      <div class="page-check-item" id="pci-q8-peach" onclick="togglePageCheck('q8-peach')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I've studied all 4 PEACH paragraphs</span></div>
+      <div class="page-check-item" id="pci-q8-mops" onclick="togglePageCheck('q8-mops')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label">I can write a MOPS conclusion for this question</span></div>
+      <div class="page-check-item" id="pci-q8-done" onclick="togglePageCheck('q8-done');toggleProgress('q8')"><div class="page-check-box"><span class="page-check-tick">✓</span></div><span class="page-check-label"><strong>✅ Mark Q8 as fully revised</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PEACH PAGE -->
+<div id="page-peach" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Writing Framework</div>
+    <h1>PEACH & MOPS Framework</h1>
+    <div class="meta"><span class="tag tag-type">Essential Exam Technique</span></div>
+  </div>
+  <div class="content-block">
+    <h2>🍑 PEACH — Every Analytical Paragraph</h2>
+    <div class="two-col">
+      <div><h3>P — Point</h3><p>Make your argument clearly in one sentence.</p></div>
+      <div><h3>E — Evidence</h3><p>Data, named business example, or theory. Name real companies!</p></div>
+      <div><h3>A — Analysis</h3><p>Explain the cause-and-effect chain. Why does the evidence support the point?</p></div>
+      <div><h3>C — Context</h3><p>Link specifically to the business/industry in the question.</p></div>
+    </div>
+    <h3>H — Higher Level Development (THE KEY TO TOP MARKS)</h3>
+    <p>Extend into a counterpoint, qualification, or second-order effect. This is what separates a B from an A.</p>
+  </div>
+  <div class="content-block">
+    <h2>🏁 MOPS — 20-Mark Conclusions Only</h2>
+    <div class="mops-card">
+      <div class="mops-item"><div class="mops-letter">M</div><div class="mops-name">Most Important</div><div class="mops-text">Your overall judgement — be decisive. State which option/factor is more significant and why.</div></div>
+      <div class="mops-item"><div class="mops-letter">O</div><div class="mops-name">Other Factors</div><div class="mops-text">Acknowledge the counter-argument. What advantages does the other option have?</div></div>
+      <div class="mops-item"><div class="mops-letter">P</div><div class="mops-name">Proviso</div><div class="mops-text">Under what circumstances might your answer change? What assumptions are you making?</div></div>
+      <div class="mops-item"><div class="mops-letter">S</div><div class="mops-name">Short vs Long Term</div><div class="mops-text">Does the answer differ in the short vs long term? Usually yes — use this to add depth.</div></div>
+    </div>
+  </div>
+  <div class="content-block">
+    <h2>📊 Mark Scheme — Question Structures</h2>
+    <div class="structure-steps">
+      <div class="structure-step"><div class="step-num">4m</div><div class="step-text"><strong>Calculate:</strong> Formula → Calculation → Unit → Apply to context</div></div>
+      <div class="structure-step"><div class="step-num">4m</div><div class="step-text"><strong>Explain:</strong> Definition → 2 pieces of evidence → Analytical point</div></div>
+      <div class="structure-step"><div class="step-num">8m</div><div class="step-text"><strong>Assess (Paper 3):</strong> Definition → 2 full PEACH paragraphs (no conclusion needed)</div></div>
+      <div class="structure-step"><div class="step-num">10m</div><div class="step-text"><strong>Assess:</strong> Definition → PEACH with H extended into counterpoint → Conclusion</div></div>
+      <div class="structure-step"><div class="step-num">12m</div><div class="step-text"><strong>Assess:</strong> Definition → 2 PEACH paragraphs (one for, one against) → Conclusion</div></div>
+      <div class="structure-step"><div class="step-num">20m</div><div class="step-text"><strong>Evaluate:</strong> Define both options → 2 PEACH per option (4 total) → MOPS conclusion</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PESTLE PAGE -->
+<div id="page-pestle" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Analysis Framework</div>
+    <h1>PESTLE — Confectionery Industry</h1>
+  </div>
+  <div class="two-col">
+    <div class="content-block" style="border-left: 3px solid #e85c5c;">
+      <h2>🔴 Political</h2>
+      <ul>
+        <li>UK Sugar Tax pressure growing to extend to confectionery</li>
+        <li>Trade policy post-Brexit — tariffs on imported ingredients</li>
+        <li>Import/export regulations vary across EU vs US vs Asia</li>
+        <li>Government healthy eating campaigns affect marketing regulation</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-left: 3px solid #f5c842;">
+      <h2>🟠 Economic</h2>
+      <ul>
+        <li>Cost-of-living crisis — trade-down to own-label; squeezes premium independents</li>
+        <li>Cocoa price volatility — record highs in 2024 from crop failures in Ghana/Côte d'Ivoire</li>
+        <li>Inflation — rising energy, labour and packaging costs</li>
+        <li>Weak pound = more expensive imported cocoa (priced in USD)</li>
+        <li>High interest rates — damaging for small firms seeking to expand</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-left: 3px solid #f5c842;">
+      <h2>🟡 Social</h2>
+      <ul>
+        <li>Premiumisation — consumers willing to pay more for artisan quality</li>
+        <li>Health & wellness — demand growing for vegan, low-sugar, free-from</li>
+        <li>Gifting culture — chocolate is UK's #1 gifted food product</li>
+        <li>Ethical consumerism — Fairtrade, Rainforest Alliance demand</li>
+        <li>Ageing population — buy premium/traditional confectionery</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-left: 3px solid #5ec4a8;">
+      <h2>🟢 Technological</h2>
+      <ul>
+        <li>E-commerce growth — DTC allows independents to reach national audiences</li>
+        <li>Social media (Instagram/TikTok) — cheap marketing for small brands</li>
+        <li>Automation — large firms invest in robotics, widens cost gap with SMEs</li>
+        <li>AI in product development — predict trends faster</li>
+        <li>Improved cold-chain logistics — premium chocolate now deliverable by post</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-left: 3px solid #5c9be8;">
+      <h2>🔵 Legal</h2>
+      <ul>
+        <li>HFSS regulations — ban confectionery advertising before 9pm watershed</li>
+        <li>Allergen labelling laws — compliance costs for all producers</li>
+        <li>National Living Wage increases — raises labour costs for small producers</li>
+        <li>CMA scrutiny of mergers — limits acquisition growth for multinationals</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-left: 3px solid #78c478;">
+      <h2>🌱 Environmental</h2>
+      <ul>
+        <li>Cocoa sustainability crisis — EU Deforestation Regulation requires supply chain proof</li>
+        <li>Packaging regulation — pressure to eliminate single-use plastic</li>
+        <li>Net-zero commitments demanded by consumers and investors</li>
+        <li>Climate change — unpredictable weather creates cocoa supply uncertainty</li>
+        <li>Fairtrade — growing expectation that cocoa farmers paid fairly</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ANSOFF PAGE -->
+<div id="page-ansoff" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Strategic Framework</div>
+    <h1>Ansoff Matrix — Confectionery</h1>
+  </div>
+  <div class="two-col">
+    <div class="content-block" style="border-top: 3px solid #5ec4a8;">
+      <h2>📊 Market Penetration — LOW RISK</h2>
+      <p><strong>Existing product, existing market</strong></p>
+      <ul>
+        <li>Cadbury runs BOGOF deals in UK supermarkets</li>
+        <li>Hotel Chocolat loyalty scheme to retain customers</li>
+        <li>McVitie's increases advertising spend to grow UK share</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-top: 3px solid #f5c842;">
+      <h2>📊 Product Development — MEDIUM RISK</h2>
+      <p><strong>New product, existing market</strong></p>
+      <ul>
+        <li>Mars launches vegan Maltesers for UK health-conscious buyers</li>
+        <li>McVitie's releases new biscuit flavour for UK market</li>
+        <li>Hotel Chocolat develops new seasonal gift range</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-top: 3px solid #f5c842;">
+      <h2>📊 Market Development — MEDIUM RISK</h2>
+      <p><strong>Existing product, new market</strong></p>
+      <ul>
+        <li>Ferrero Rocher expands into India and China</li>
+        <li>UK artisan brand sells online internationally via e-commerce</li>
+        <li>Lottie Shaw's exports to EU via UK-EU trade deal</li>
+      </ul>
+    </div>
+    <div class="content-block" style="border-top: 3px solid #e85c5c;">
+      <h2>📊 Diversification — HIGH RISK</h2>
+      <p><strong>New product, new market</strong></p>
+      <ul>
+        <li>Mondelez enters snack bar market in Southeast Asia</li>
+        <li>Hotel Chocolat opens cafés — new product and experience</li>
+        <li>Confectionery firm enters subscription box market</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PORTER'S PAGE -->
+<div id="page-porters" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Competitive Analysis</div>
+    <h1>Porter's Five Forces — Confectionery</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div class="content-block" style="border-left:3px solid #f5c842"><h2>1. Threat of New Entrants — LOW-MEDIUM</h2><ul><li>High capital needed for manufacturing at scale</li><li>Strong brand loyalty to Cadbury, Mars, Nestlé</li><li>BUT: Low barriers for artisan/online entrants</li><li>E-commerce reduces distribution barriers for small brands</li></ul></div>
+    <div class="content-block" style="border-left:3px solid #e85c5c"><h2>2. Threat of Substitutes — HIGH</h2><ul><li>Snack bars, fruit, crisps all compete for treat spend</li><li>Health trend drives consumers away from confectionery</li><li>Premium gifting alternatives (flowers, candles)</li></ul></div>
+    <div class="content-block" style="border-left:3px solid #5c9be8"><h2>3. Bargaining Power of Suppliers — MEDIUM-HIGH</h2><ul><li>Cocoa from few regions — Ghana, Côte d'Ivoire dominate (60%+ of world supply)</li><li>Climate change threatens supply — prices volatile</li><li>Large firms negotiate better terms than SMEs</li></ul></div>
+    <div class="content-block" style="border-left:3px solid #e87b3a"><h2>4. Bargaining Power of Buyers — HIGH</h2><ul><li>Supermarkets (Tesco, Sainsbury's) demand low prices</li><li>Consumers price-sensitive in cost-of-living squeeze</li><li>BUT: Premium buyers (Hotel Chocolat customers) less price-sensitive</li></ul></div>
+    <div class="content-block" style="grid-column:1/-1;border-left:3px solid #e85c5c"><h2>5. Competitive Rivalry — VERY HIGH</h2><ul><li>Mondelez, Mars, Nestlé, Ferrero fight for supermarket shelf space</li><li>Heavy advertising spend needed to maintain market share</li><li>Price wars between own-label and branded</li><li>Saturated UK market — growth must come from innovation or international expansion</li></ul></div>
+  </div>
+</div>
+
+<!-- KEY TERMS PAGE -->
+<div id="page-keyterms" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Complete Reference</div>
+    <h1>Complete Key Terms Glossary</h1>
+  </div>
+  <div class="content-block">
+    <h2>📖 All Key Terms — Alphabetical</h2>
+    <table class="terms-table">
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td>Angel Investor</td><td>Wealthy individual investing in small businesses in exchange for an equity stake</td></tr>
+      <tr><td>Ansoff Matrix</td><td>Strategic framework with four growth strategies: market penetration, product development, market development, diversification</td></tr>
+      <tr><td>ARR</td><td>Average Rate of Return — average annual profit as % of initial investment: (Avg Annual Profit ÷ Outlay) × 100</td></tr>
+      <tr><td>Balance of Payments</td><td>Record of all financial transactions between a country and the rest of the world</td></tr>
+      <tr><td>Bank Loan</td><td>Fixed sum borrowed from a bank, repaid with interest — suitable for long-term capital expenditure</td></tr>
+      <tr><td>Boston Matrix</td><td>Portfolio analysis tool — stars, cash cows, question marks, dogs based on market share and growth</td></tr>
+      <tr><td>Brand Dilution</td><td>When a premium brand's image is weakened — risk for Lottie Shaw's if linked to mass own-label production</td></tr>
+      <tr><td>Brand Equity</td><td>Commercial value of a brand name — built through quality and marketing</td></tr>
+      <tr><td>Brexit</td><td>UK's exit from EU in 2020 — ended free movement and created new trade friction</td></tr>
+      <tr><td>BRICS</td><td>Emerging economies: Brazil, Russia, India, China, South Africa</td></tr>
+      <tr><td>Buyer Power</td><td>Large buyer's ability to force down prices — supermarkets squeeze confectionery suppliers</td></tr>
+      <tr><td>Carroll's CSR Pyramid</td><td>Economic, legal, ethical and philanthropic responsibilities — businesses should meet all four</td></tr>
+      <tr><td>Channel Conflict</td><td>When distribution channels compete — retailer objects to producer selling DTC at lower price</td></tr>
+      <tr><td>Collateral</td><td>Asset pledged as security against a loan — seized by lender if borrower defaults</td></tr>
+      <tr><td>Corporation Tax</td><td>Tax on business profits — currently 25% in UK; directly reduces retained profit for investment</td></tr>
+      <tr><td>Direct Tax</td><td>Tax paid directly by a business or individual — e.g. corporation tax, income tax</td></tr>
+      <tr><td>Discount Factor</td><td>Multiplier applied to future cash flows — reflects that £1 today is worth more than £1 in future</td></tr>
+      <tr><td>Economies of Scale</td><td>Reduction in unit costs from increasing output — achieved through mass production</td></tr>
+      <tr><td>Equity Finance</td><td>Raising capital by selling shares — no repayment required but ownership is diluted</td></tr>
+      <tr><td>Exchange Rate</td><td>Price of one currency in terms of another — weak pound makes imports more expensive</td></tr>
+      <tr><td>FDI</td><td>Foreign Direct Investment — investment by a foreign company in a host country's economy</td></tr>
+      <tr><td>Fiscal Policy</td><td>Government decisions on taxation and spending to influence the economy</td></tr>
+      <tr><td>Flexible Workforce</td><td>Workers who vary hours, contracts or roles to meet changing business needs</td></tr>
+      <tr><td>GDP</td><td>Gross Domestic Product — total value of goods and services produced by a country</td></tr>
+      <tr><td>Gearing</td><td>(Non-Current Liabilities ÷ Capital Employed) × 100 — above 50% = highly geared = risky</td></tr>
+      <tr><td>Globalisation</td><td>Process by which world economies become increasingly interconnected</td></tr>
+      <tr><td>HFSS Regulations</td><td>High Fat, Sugar, Salt — ban advertising of confectionery before 9pm watershed</td></tr>
+      <tr><td>Import Tariff</td><td>Tax on imported goods — raises cost of raw materials like cocoa and sugar</td></tr>
+      <tr><td>Indirect Tax</td><td>Tax collected via the price of goods — e.g. VAT, sugar levy</td></tr>
+      <tr><td>Limited Liability</td><td>Shareholders only lose their invested amount — personal assets are protected</td></tr>
+      <tr><td>Liquidity</td><td>Ability to meet short-term financial obligations — poor liquidity risks insolvency</td></tr>
+      <tr><td>MNC</td><td>Multinational Corporation — firm with headquarters in one country and operations in others</td></tr>
+      <tr><td>MINT</td><td>Emerging economies: Mexico, Indonesia, Nigeria, Turkey</td></tr>
+      <tr><td>Multi-Channel Distribution</td><td>Selling through multiple routes to market simultaneously</td></tr>
+      <tr><td>Multiplier Effect</td><td>Initial spending injection generates additional rounds of economic activity</td></tr>
+      <tr><td>NPV</td><td>Net Present Value — present-day value of future cash flows minus initial investment; positive = worthwhile</td></tr>
+      <tr><td>Own-Label Production</td><td>Manufacturing products sold under a retailer's brand — high volume, low margin</td></tr>
+      <tr><td>Overtrading</td><td>Growing faster than cash flow can support — profitable but runs out of cash</td></tr>
+      <tr><td>Payback Period</td><td>Time for an investment to pay for itself — businesses want shortest payback</td></tr>
+      <tr><td>PED</td><td>Price Elasticity of Demand — % change in demand ÷ % change in price</td></tr>
+      <tr><td>Premiumisation</td><td>Consumer trend of trading up to higher-quality, artisan or luxury products</td></tr>
+      <tr><td>Private Limited Company (Ltd)</td><td>Business with private shares — shareholders have limited liability</td></tr>
+      <tr><td>Profit Repatriation</td><td>MNC sends host-country profits back to home country rather than reinvesting locally</td></tr>
+      <tr><td>Protectionism</td><td>Government policies restricting imports to protect domestic industries</td></tr>
+      <tr><td>ROCE</td><td>Return on Capital Employed — (Operating Profit ÷ Capital Employed) × 100</td></tr>
+      <tr><td>Rules of Origin</td><td>Requirements that goods contain minimum % of content from within a trade area to qualify for zero tariffs</td></tr>
+      <tr><td>Shrinkflation</td><td>Reducing product size while maintaining price — maintains margins but damages consumer trust</td></tr>
+      <tr><td>Sugar Levy</td><td>Tax on high-sugar products — currently soft drinks; lobbying pressure to extend to confectionery</td></tr>
+      <tr><td>Trading Bloc</td><td>Group of countries that agree to reduce trade barriers between them — e.g. EU</td></tr>
+      <tr><td>Transfer Pricing</td><td>MNCs shift profits between countries via internal pricing to minimise tax</td></tr>
+      <tr><td>Time Value of Money</td><td>£1 today is worth more than £1 in future — justifies NPV's discount factor approach</td></tr>
+      <tr><td>USP</td><td>Unique Selling Point — the distinctive feature differentiating a product; Lottie Shaw's = Yorkshire heritage</td></tr>
+      <tr><td>Zero-Hours Contract</td><td>No guaranteed hours — worker only called in when business needs them</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- FLASHCARD PAGE -->
+<div id="page-flashcards" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · Interactive</div>
+    <h1>🃏 Flashcard Quiz</h1>
+    <div class="meta"><span class="tag tag-type">Test Your Knowledge</span></div>
+  </div>
+
+  <!-- SETUP SCREEN -->
+  <div id="fc-setup-screen">
+    <div class="fc-setup">
+      <h2>Set Up Your Quiz</h2>
+      <p>Choose how many cards and which topics to include, then test yourself.</p>
+
+      <div class="fc-slider-wrap">
+        <label>How many flashcards?</label>
+        <div class="fc-count" id="fc-num-display">10</div>
+        <div class="fc-count-label">cards</div>
+        <input type="range" id="fc-slider" min="5" max="50" step="5" value="10" oninput="updateSlider(this.value)">
+        <div style="display:flex;justify-content:space-between;margin-top:0.5rem;font-size:0.72rem;color:var(--muted)"><span>5</span><span>25</span><span>50</span></div>
+      </div>
+
+      <div class="fc-filter-wrap">
+        <label>Select topics (tap to toggle):</label>
+        <div class="fc-filter-grid" id="fc-topic-filters">
+          <button class="fc-filter-btn selected" data-topic="all" onclick="toggleTopic(this)">✅ All Topics</button>
+          <button class="fc-filter-btn" data-topic="q1" onclick="toggleTopic(this)">Q1 Flexible Workforce</button>
+          <button class="fc-filter-btn" data-topic="q2" onclick="toggleTopic(this)">Q2 Taxation</button>
+          <button class="fc-filter-btn" data-topic="q3" onclick="toggleTopic(this)">Q3 MNCs & Nigeria</button>
+          <button class="fc-filter-btn" data-topic="q4" onclick="toggleTopic(this)">Q4 Investment Appraisal</button>
+          <button class="fc-filter-btn" data-topic="q5" onclick="toggleTopic(this)">Q5 Forms of Business</button>
+          <button class="fc-filter-btn" data-topic="q6" onclick="toggleTopic(this)">Q6 Sources of Finance</button>
+          <button class="fc-filter-btn" data-topic="q7" onclick="toggleTopic(this)">Q7 Trading Blocs</button>
+          <button class="fc-filter-btn" data-topic="q8" onclick="toggleTopic(this)">Q8 Growth Strategy</button>
+          <button class="fc-filter-btn" data-topic="general" onclick="toggleTopic(this)">General Business</button>
+        </div>
+      </div>
+
+      <button class="fc-start-btn" onclick="startFlashcards()">Start Quiz →</button>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="fc-game-screen" class="fc-game">
+    <div class="fc-hud">
+      <span class="fc-prog" id="fc-prog-text">Card 1 of 10</span>
+      <div class="fc-score">
+        <span class="fc-s-got">✓ <span id="fc-got-count">0</span> Got it</span>
+        <span class="fc-s-miss">✗ <span id="fc-miss-count">0</span> Missed</span>
+      </div>
+    </div>
+    <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-prog-fill" style="width:0%"></div></div>
+
+    <div class="fc-card-wrap" onclick="flipCard()">
+      <div class="fc-card" id="fc-card">
+        <div class="fc-face fc-front">
+          <div class="fc-face-label">Term — tap to reveal</div>
+          <div class="fc-term" id="fc-term-text">Loading...</div>
+          <div class="fc-tag" id="fc-term-topic"></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-face-label">Definition</div>
+          <div class="fc-def" id="fc-def-text">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fc-flip-hint">👆 Tap the card to flip it, then mark yourself below</p>
+
+    <div class="fc-actions">
+      <button class="fc-btn fc-btn-miss" onclick="markCard(false)">✗ Missed</button>
+      <button class="fc-btn fc-btn-got" onclick="markCard(true)">✓ Got it</button>
+    </div>
+    <button class="fc-skip" onclick="markCard(null)">Skip →</button>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="fc-results-screen" class="fc-results">
+    <h2>Quiz Complete! 🎉</h2>
+    <div class="fc-results-score" id="fc-final-score">8/10</div>
+    <p class="fc-results-sub" id="fc-final-msg">Great work — review the missed terms below.</p>
+    <div class="fc-missed-list" id="fc-missed-list" style="display:none">
+      <h3>❌ Terms to Revisit</h3>
+      <div id="fc-missed-items"></div>
+    </div>
+    <button class="fc-restart-btn" onclick="restartFlashcards()">Try Again</button>
+    <button class="fc-back-home-btn" onclick="showPage('home')">← Home</button>
+  </div>
+</div>
+
+<!-- PROGRESS TRACKER PAGE -->
+<div id="page-progress" class="page">
+  <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <div class="page-header">
+    <div class="breadcrumb">Extra Resources · My Progress</div>
+    <h1>📈 Progress Tracker</h1>
+    <div class="meta"><span class="tag tag-type">Saved to this device</span></div>
+  </div>
+
+  <div class="progress-overview" id="prog-overview">
+    <div class="prog-stat"><div class="stat-num" id="po-done">0</div><div class="stat-label">Topics Done</div></div>
+    <div class="prog-stat"><div class="stat-num" id="po-total">0</div><div class="stat-label">Total Topics</div></div>
+    <div class="prog-stat"><div class="stat-num" id="po-pct">0%</div><div class="stat-label">Complete</div></div>
+    <div class="prog-stat"><div class="stat-num" id="po-marks">0</div><div class="stat-label">Marks Covered</div></div>
+  </div>
+
+  <div class="prog-bar-wrap">
+    <h3>Overall Progress</h3>
+    <div class="prog-bar-track"><div class="prog-bar-fill" id="prog-overall-fill" style="width:0%"></div></div>
+  </div>
+
+  <!-- PROGRESS CHART -->
+  <div class="prog-chart-wrap">
+    <h3>📊 Marks Breakdown by Question</h3>
+    <div class="prog-chart-inner">
+      <!-- Donut ring -->
+      <div class="prog-donut-wrap">
+        <svg class="prog-donut-svg" viewBox="0 0 120 120" width="120" height="120">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--border)" stroke-width="12"/>
+          <circle id="donut-arc" cx="60" cy="60" r="48" fill="none"
+            stroke="url(#donutGrad)" stroke-width="12"
+            stroke-linecap="round"
+            stroke-dasharray="0 301.6"
+            transform="rotate(-90 60 60)"
+            style="transition: stroke-dasharray 0.7s cubic-bezier(0.4,0,0.2,1)"/>
+          <defs>
+            <linearGradient id="donutGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f5c842"/>
+              <stop offset="100%" stop-color="#5ec4a8"/>
+            </linearGradient>
+          </defs>
+          <text id="donut-pct-text" x="60" y="56" text-anchor="middle"
+            font-family="'Playfair Display', serif" font-size="22" font-weight="900"
+            fill="#e8e8f0">0%</text>
+          <text x="60" y="73" text-anchor="middle"
+            font-family="'DM Sans', sans-serif" font-size="9"
+            fill="#888899" letter-spacing="0.5">COMPLETE</text>
+        </svg>
+        <div class="prog-donut-label">Marks<br><strong id="donut-marks-label" style="color:var(--accent);font-family:'DM Mono',monospace">0/80</strong></div>
+      </div>
+
+      <!-- Bar chart per question -->
+      <div class="prog-bars" id="prog-bar-chart">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="prog-section">
+    <div class="prog-section-title">Section A — McVitie's / Pladis</div>
+    <div class="prog-item" id="pt-q1" onclick="toggleProgress('q1')" data-marks="8">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q1 — Flexible Workforce</div>
+      <div class="prog-item-marks">8m</div>
+    </div>
+    <div class="prog-item" id="pt-q2" onclick="toggleProgress('q2')" data-marks="10">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q2 — Taxation</div>
+      <div class="prog-item-marks">10m</div>
+    </div>
+    <div class="prog-item" id="pt-q3" onclick="toggleProgress('q3')" data-marks="12">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q3 — Pladis & Nigeria</div>
+      <div class="prog-item-marks">12m</div>
+    </div>
+    <div class="prog-item" id="pt-q4" onclick="toggleProgress('q4')" data-marks="20">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q4 — Investment Appraisal ⭐</div>
+      <div class="prog-item-marks">20m</div>
+    </div>
+  </div>
+
+  <div class="prog-section">
+    <div class="prog-section-title">Section B — Lottie Shaw's / William Jacksons</div>
+    <div class="prog-item" id="pt-q5" onclick="toggleProgress('q5')" data-marks="8">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q5 — Ltd Company Benefits</div>
+      <div class="prog-item-marks">8m</div>
+    </div>
+    <div class="prog-item" id="pt-q6" onclick="toggleProgress('q6')" data-marks="10">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q6 — Bank Loan Finance</div>
+      <div class="prog-item-marks">10m</div>
+    </div>
+    <div class="prog-item" id="pt-q7" onclick="toggleProgress('q7')" data-marks="12">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q7 — UK-EU Trade Deal</div>
+      <div class="prog-item-marks">12m</div>
+    </div>
+    <div class="prog-item" id="pt-q8" onclick="toggleProgress('q8')" data-marks="20">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Q8 — Growth Strategy ⭐</div>
+      <div class="prog-item-marks">20m</div>
+    </div>
+  </div>
+
+  <div class="prog-section">
+    <div class="prog-section-title">Extra Resources</div>
+    <div class="prog-item" id="pt-peach" onclick="toggleProgress('peach')" data-marks="0">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">PEACH & MOPS Framework</div>
+      <div class="prog-item-marks">—</div>
+    </div>
+    <div class="prog-item" id="pt-pestle" onclick="toggleProgress('pestle')" data-marks="0">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">PESTLE Analysis</div>
+      <div class="prog-item-marks">—</div>
+    </div>
+    <div class="prog-item" id="pt-keyterms" onclick="toggleProgress('keyterms')" data-marks="0">
+      <div class="prog-check"><span class="prog-check-tick">✓</span></div>
+      <div class="prog-item-name">Key Terms Glossary</div>
+      <div class="prog-item-marks">—</div>
+    </div>
+  </div>
+
+  <div class="prog-device-info">
+    <div class="prog-device-dot"></div>
+    <span>Progress saved to this device — IP: <strong id="device-ip">detecting...</strong></span>
+  </div>
+
+  <button class="prog-reset-btn" onclick="resetProgress()">Reset All Progress</button>
+</div>
+
+</main>
+
+<script>
+  // ─── STORAGE KEY PREFIX (device-specific via IP hash) ───────────────────────
+  let STORE_PREFIX = 'biz_rev_';
+
+  async function getDeviceIP() {
+    try {
+      const r = await fetch('https://api.ipify.org?format=json');
+      const d = await r.json();
+      return d.ip;
+    } catch {
+      try {
+        const r2 = await fetch('https://api64.ipify.org?format=json');
+        const d2 = await r2.json();
+        return d2.ip;
+      } catch {
+        return 'local_' + navigator.userAgent.length;
+      }
+    }
+  }
+
+  async function initDevice() {
+    const ip = await getDeviceIP();
+    // Simple hash so IP isn't stored in plain key names
+    let hash = 0;
+    for (let i = 0; i < ip.length; i++) hash = ((hash << 5) - hash) + ip.charCodeAt(i);
+    STORE_PREFIX = 'biz_rev_' + Math.abs(hash) + '_';
+    const el = document.getElementById('device-ip');
+    if (el) el.textContent = ip;
+    loadAllProgress();
+    loadAllPageChecks();
+  }
+
+  function store(key, value) {
+    try { localStorage.setItem(STORE_PREFIX + key, JSON.stringify(value)); } catch(e) {}
+  }
+
+  function retrieve(key, fallback = null) {
+    try {
+      const v = localStorage.getItem(STORE_PREFIX + key);
+      return v !== null ? JSON.parse(v) : fallback;
+    } catch { return fallback; }
+  }
+
+  // ─── NAVIGATION ──────────────────────────────────────────────────────────────
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('open'));
+    window.scrollTo(0, 0);
+    if (id === 'progress') refreshProgressPage();
+    if (id === 'flashcards') resetFlashcardToSetup();
+  }
+
+  function toggleNav(id) {
+    const group = document.getElementById(id);
+    const isOpen = group.classList.contains('open');
+    document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('open'));
+    if (!isOpen) group.classList.add('open');
+  }
+
+  function switchTab(btn, tabId) {
+    const page = btn.closest('.page');
+    page.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    page.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-group')) {
+      document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('open'));
+    }
+  });
+
+  // ─── PROGRESS TRACKER ────────────────────────────────────────────────────────
+  const PROGRESS_ITEMS = ['q1','q2','q3','q4','q5','q6','q7','q8','peach','pestle','keyterms'];
+  const MARKS_MAP = { q1:8, q2:10, q3:12, q4:20, q5:8, q6:10, q7:12, q8:20, peach:0, pestle:0, keyterms:0 };
+
+  function toggleProgress(id) {
+    const current = retrieve('prog_' + id, false);
+    const newVal = !current;
+    store('prog_' + id, newVal);
+    applyProgressItem(id, newVal);
+    refreshProgressPage();
+    // sync the "done" page check too
+    const doneCheck = document.getElementById('pci-' + id + '-done');
+    if (doneCheck) {
+      if (newVal) doneCheck.classList.add('done');
+      else doneCheck.classList.remove('done');
+    }
+  }
+
+  function applyProgressItem(id, done) {
+    const el = document.getElementById('pt-' + id);
+    if (!el) return;
+    if (done) el.classList.add('completed');
+    else el.classList.remove('completed');
+  }
+
+  function loadAllProgress() {
+    PROGRESS_ITEMS.forEach(id => {
+      const done = retrieve('prog_' + id, false);
+      applyProgressItem(id, done);
+    });
+    refreshProgressPage();
+  }
+
+  function refreshProgressPage() {
+    const done = PROGRESS_ITEMS.filter(id => retrieve('prog_' + id, false));
+    const total = PROGRESS_ITEMS.length;
+    const pct = Math.round((done.length / total) * 100);
+    const marksTotal = PROGRESS_ITEMS.reduce((s, id) => s + MARKS_MAP[id], 0);
+    const marksDone = done.reduce((s, id) => s + MARKS_MAP[id], 0);
+
+    const elDone = document.getElementById('po-done');
+    const elTotal = document.getElementById('po-total');
+    const elPct = document.getElementById('po-pct');
+    const elMarks = document.getElementById('po-marks');
+    const elFill = document.getElementById('prog-overall-fill');
+
+    if (elDone) elDone.textContent = done.length;
+    if (elTotal) elTotal.textContent = total;
+    if (elPct) elPct.textContent = pct + '%';
+    if (elMarks) elMarks.textContent = marksDone + '/' + marksTotal;
+    if (elFill) elFill.style.width = pct + '%';
+
+    // ── chart updates ──
+    const donutArc = document.getElementById('donut-arc');
+    const donutPctText = document.getElementById('donut-pct-text');
+    const donutMarksLabel = document.getElementById('donut-marks-label');
+    const circumference = 2 * Math.PI * 48; // 301.6
+    const marksPct = marksTotal > 0 ? marksDone / marksTotal : 0;
+    if (donutArc) donutArc.setAttribute('stroke-dasharray', (circumference * marksPct).toFixed(1) + ' ' + circumference.toFixed(1));
+    if (donutPctText) donutPctText.textContent = Math.round(marksPct * 100) + '%';
+    if (donutMarksLabel) donutMarksLabel.textContent = marksDone + '/' + marksTotal;
+
+    // bar chart — only questions with marks
+    const barItems = [
+      { id:'q1', label:'Q1 (8m)', marks:8 },
+      { id:'q2', label:'Q2 (10m)', marks:10 },
+      { id:'q3', label:'Q3 (12m)', marks:12 },
+      { id:'q4', label:'Q4 (20m)', marks:20 },
+      { id:'q5', label:'Q5 (8m)', marks:8 },
+      { id:'q6', label:'Q6 (10m)', marks:10 },
+      { id:'q7', label:'Q7 (12m)', marks:12 },
+      { id:'q8', label:'Q8 (20m)', marks:20 },
+    ];
+    const maxMarks = 20;
+    const container = document.getElementById('prog-bar-chart');
+    if (container) {
+      container.innerHTML = barItems.map(item => {
+        const isDone = retrieve('prog_' + item.id, false);
+        const fillPct = isDone ? (item.marks / maxMarks * 100) : 0;
+        return `<div class="prog-bar-row">
+          <div class="prog-bar-name">${item.label}</div>
+          <div class="prog-bar-track-sm">
+            <div class="prog-bar-fill-sm ${isDone ? 'done-bar' : 'pending-bar'}" style="width:${isDone ? fillPct : 2}%"></div>
+          </div>
+          <div class="prog-bar-marks ${isDone ? 'is-done' : ''}">${isDone ? '✓' : item.marks + 'm'}</div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  function resetProgress() {
+    if (!confirm('Reset all progress for this device? This cannot be undone.')) return;
+    PROGRESS_ITEMS.forEach(id => store('prog_' + id, false));
+    // also clear all page checks
+    const allChecks = retrieve('page_checks', {});
+    Object.keys(allChecks).forEach(k => { allChecks[k] = false; });
+    store('page_checks', allChecks);
+    loadAllProgress();
+    loadAllPageChecks();
+  }
+
+  // ─── PAGE-LEVEL CHECKBOXES ────────────────────────────────────────────────────
+  function togglePageCheck(checkId) {
+    const checks = retrieve('page_checks', {});
+    checks[checkId] = !checks[checkId];
+    store('page_checks', checks);
+    applyPageCheck(checkId, checks[checkId]);
+  }
+
+  function applyPageCheck(checkId, done) {
+    const el = document.getElementById('pci-' + checkId);
+    if (!el) return;
+    if (done) el.classList.add('done');
+    else el.classList.remove('done');
+  }
+
+  function loadAllPageChecks() {
+    const checks = retrieve('page_checks', {});
+    Object.entries(checks).forEach(([k, v]) => applyPageCheck(k, v));
+    // Also sync progress item done-ticks from stored progress
+    PROGRESS_ITEMS.forEach(id => {
+      const done = retrieve('prog_' + id, false);
+      const el = document.getElementById('pci-' + id + '-done');
+      if (el && done) el.classList.add('done');
+    });
+  }
+
+  // ─── FLASHCARD DATA ───────────────────────────────────────────────────────────
+  const ALL_CARDS = [
+    // Q1 — Flexible Workforce
+    { term: 'Flexible Workforce', def: 'A workforce where employees vary hours, contracts or roles to meet changing business needs.', topic: 'Q1' },
+    { term: 'Zero-Hours Contract', def: 'No guaranteed hours — worker only called in when the business needs them.', topic: 'Q1' },
+    { term: 'Temporary Contract', def: 'Fixed-period employment — used for seasonal demand peaks without long-term cost commitment.', topic: 'Q1' },
+    { term: 'Multi-Skilled Worker', def: 'An employee trained across multiple roles who can be redeployed as business needs change.', topic: 'Q1' },
+    { term: 'Annualised Hours', def: 'Total working hours agreed per year but distributed flexibly across busy and quiet periods.', topic: 'Q1' },
+    { term: 'Labour Turnover', def: 'The rate at which employees leave and are replaced — high turnover increases recruitment and training costs.', topic: 'Q1' },
+    { term: 'Herzberg — Hygiene Factors', def: 'Basic needs (e.g. job security) that if removed cause dissatisfaction — zero-hours contracts remove security.', topic: 'Q1' },
+    { term: 'Taylor (Scientific Management)', def: 'Theory that workers are primarily motivated by money — supports pay-per-hour flexible arrangements.', topic: 'Q1' },
+    // Q2 — Taxation
+    { term: 'Direct Tax', def: 'A tax paid directly by a business or individual — e.g. corporation tax, income tax.', topic: 'Q2' },
+    { term: 'Indirect Tax', def: 'A tax collected via the price of goods — e.g. VAT, sugar levy, import tariffs.', topic: 'Q2' },
+    { term: 'Corporation Tax', def: 'Tax on business profits — currently 25% in the UK; directly reduces retained profit for investment.', topic: 'Q2' },
+    { term: 'Sugar Levy', def: 'Tax on high-sugar products — currently soft drinks; lobbying pressure to extend to confectionery and biscuits.', topic: 'Q2' },
+    { term: 'Fiscal Policy', def: 'Government decisions on taxation and spending used to influence the economy.', topic: 'Q2' },
+    { term: 'Transfer Pricing', def: 'MNCs shift profits between countries via internal pricing to minimise tax in host countries.', topic: 'Q2' },
+    { term: 'Disposable Income', def: 'Income remaining after taxes — determines how much consumers can spend on confectionery.', topic: 'Q2' },
+    // Q3 — MNCs & Nigeria
+    { term: 'MNC', def: 'A firm with headquarters in one country and branches or production plants in others — not just an exporter.', topic: 'Q3' },
+    { term: 'FDI (Foreign Direct Investment)', def: 'Investment by a foreign company into the host country\'s economy — positive short-term, but profits may be repatriated long-term.', topic: 'Q3' },
+    { term: 'Profit Repatriation', def: 'When an MNC sends profits earned in the host country back to its home country rather than reinvesting locally.', topic: 'Q3' },
+    { term: 'Multiplier Effect', def: 'Initial injection of spending (e.g. MNC wages) generates additional rounds of spending in the local economy.', topic: 'Q3' },
+    { term: 'MINT Economies', def: 'Emerging economies: Mexico, Indonesia, Nigeria, Turkey — fast-growing markets with large populations.', topic: 'Q3' },
+    { term: 'Balance of Payments', def: 'A record of all financial transactions between a country and the rest of the world — profit outflows worsen this.', topic: 'Q3' },
+    { term: 'GDP per Capita', def: 'A country\'s total output divided by its population — used to measure average living standards.', topic: 'Q3' },
+    // Q4 — Investment Appraisal
+    { term: 'Payback Period', def: 'The length of time it takes for an investment to pay for itself from net returns — businesses want the shortest payback.', topic: 'Q4' },
+    { term: 'ARR (Average Rate of Return)', def: 'Average annual profit as a percentage of the initial investment. Formula: (Average Annual Profit ÷ Initial Outlay) × 100.', topic: 'Q4' },
+    { term: 'NPV (Net Present Value)', def: 'Present-day value of all future cash flows minus the initial investment — a positive NPV means the investment is worthwhile.', topic: 'Q4' },
+    { term: 'Discount Factor', def: 'A multiplier applied to future cash flows — reflects that money today is worth more than money in the future.', topic: 'Q4' },
+    { term: 'Time Value of Money', def: '£1 today is worth more than £1 in the future due to inflation, opportunity cost and risk.', topic: 'Q4' },
+    { term: 'Opportunity Cost', def: 'The value of the next best alternative foregone — capital tied up in an investment cannot be used elsewhere.', topic: 'Q4' },
+    { term: 'Capital Expenditure', def: 'Spending on long-term assets such as machinery or buildings — what investment appraisal is used to evaluate.', topic: 'Q4' },
+    // Q5 — Forms of Business
+    { term: 'Limited Liability', def: 'Shareholders can only lose the amount they invested — personal assets (home, savings) are protected if the business fails.', topic: 'Q5' },
+    { term: 'Unlimited Liability', def: 'The owner is personally responsible for ALL business debts — personal assets can be seized by creditors.', topic: 'Q5' },
+    { term: 'Private Limited Company (Ltd)', def: 'Business where ownership is divided into private shares — shareholders have limited liability and shares cannot be sold publicly.', topic: 'Q5' },
+    { term: 'Dilution of Ownership', def: 'When new shares are issued, existing owners\' % stake falls — reducing their share of profits and voting power.', topic: 'Q5' },
+    { term: 'Separate Legal Identity', def: 'A Ltd company is legally distinct from its owners — it can own assets, sign contracts and be sued in its own name.', topic: 'Q5' },
+    { term: 'Angel Investor', def: 'A wealthy individual who invests in small businesses in exchange for an equity stake.', topic: 'Q5' },
+    { term: 'Share Issue', def: 'Raising finance by selling new shares to investors — no repayment required but ownership is diluted.', topic: 'Q5' },
+    // Q6 — Sources of Finance
+    { term: 'Bank Loan', def: 'A fixed sum borrowed from a bank, repaid with interest over an agreed period — suited to long-term capital expenditure.', topic: 'Q6' },
+    { term: 'Retained Profit', def: 'Profit kept in the business rather than paid as dividends — the cheapest source of finance with no repayment.', topic: 'Q6' },
+    { term: 'Equity Finance', def: 'Raising capital by selling shares — no repayment required but profits and ownership are shared with new shareholders.', topic: 'Q6' },
+    { term: 'Gearing', def: 'The proportion of a business funded by long-term debt. Formula: (Non-Current Liabilities ÷ Capital Employed) × 100. Above 50% = risky.', topic: 'Q6' },
+    { term: 'Liquidity', def: 'The ability of a business to meet its short-term financial obligations — poor liquidity risks insolvency even if profitable.', topic: 'Q6' },
+    { term: 'Collateral', def: 'An asset pledged as security against a loan — seized by the lender if the borrower defaults on repayments.', topic: 'Q6' },
+    { term: 'Overtrading', def: 'Growing faster than cash flow can support — a business can be profitable but still run out of cash and fail.', topic: 'Q6' },
+    // Q7 — Trading Blocs
+    { term: 'Trading Bloc', def: 'A group of countries that agree to reduce or remove trade barriers between them to promote trade — e.g. the EU.', topic: 'Q7' },
+    { term: 'EU Single Market', def: 'A trading area with free movement of goods, services, capital and people — eliminates tariff and non-tariff barriers.', topic: 'Q7' },
+    { term: 'Tariff', def: 'A tax on imported goods — raises the price of imports, making them less competitive than domestic goods.', topic: 'Q7' },
+    { term: 'Protectionism', def: 'Government policies designed to restrict imports and protect domestic industries from foreign competition.', topic: 'Q7' },
+    { term: 'Rules of Origin', def: 'Requirements that goods must contain a minimum % of content from within a trade area to qualify for zero tariffs.', topic: 'Q7' },
+    { term: 'Non-Tariff Barrier', def: 'Trade restrictions other than tariffs — e.g. regulatory standards, customs checks, labelling requirements.', topic: 'Q7' },
+    { term: 'Brexit', def: 'The UK\'s exit from the EU in 2020 — ended free movement and created new trade friction with customs and regulatory checks.', topic: 'Q7' },
+    // Q8 — Growth Strategy
+    { term: 'Multi-Channel Distribution', def: 'Selling products through multiple different routes to market simultaneously — e.g. own website, retailers, marketplaces.', topic: 'Q8' },
+    { term: 'Own-Label Production', def: 'Manufacturing products sold under a retailer\'s brand name — typically high volume but low margin for the producer.', topic: 'Q8' },
+    { term: 'Ansoff Matrix', def: 'Strategic framework with four growth strategies: market penetration, product development, market development, diversification.', topic: 'Q8' },
+    { term: 'Brand Equity', def: 'The commercial value of a brand name — built through quality and marketing; damaged by own-label association.', topic: 'Q8' },
+    { term: 'Economies of Scale', def: 'Reductions in unit cost achieved by increasing output — own-label production delivers this through guaranteed high volumes.', topic: 'Q8' },
+    { term: 'Buyer Power', def: 'The ability of a large retailer to negotiate low prices from suppliers — squeezes own-label producer margins significantly.', topic: 'Q8' },
+    { term: 'Brand Dilution', def: 'When a brand\'s premium image is weakened — risk for Lottie Shaw\'s if its artisan brand becomes linked to mass own-label.', topic: 'Q8' },
+    { term: 'Channel Conflict', def: 'When different distribution channels compete — e.g. a retailer objects if the producer also sells direct online.', topic: 'Q8' },
+    { term: 'USP (Unique Selling Point)', def: 'The distinctive feature that differentiates a product — Lottie Shaw\'s USP is its Yorkshire artisan heritage.', topic: 'Q8' },
+    // General
+    { term: 'PEACH', def: 'Exam paragraph framework: Point → Evidence → Analysis → Context → Higher development.', topic: 'General' },
+    { term: 'MOPS', def: 'Conclusion framework for 20-mark questions: Most important → Other factors → Proviso → Short vs Long term.', topic: 'General' },
+    { term: 'Price Elasticity of Demand (PED)', def: 'How responsive demand is to a price change. Formula: % change in quantity demanded ÷ % change in price.', topic: 'General' },
+    { term: 'Elastic Demand', def: 'Demand is very sensitive to price changes (PED > -1) — e.g. premium confectionery with many substitutes.', topic: 'General' },
+    { term: 'Inelastic Demand', def: 'Demand is not very sensitive to price changes (PED < -1) — e.g. Cadbury Dairy Milk with strong brand loyalty.', topic: 'General' },
+    { term: 'Premiumisation', def: 'Consumer trend of trading up to higher-quality, artisan or luxury products — benefits independents like Hotel Chocolat.', topic: 'General' },
+    { term: 'Shrinkflation', def: 'Reducing product size while maintaining price — maintains margins but can damage consumer trust.', topic: 'General' },
+    { term: 'Stakeholder', def: 'Any individual or organisation with an interest in or affected by the activities of a business — broader than shareholders.', topic: 'General' },
+    { term: 'Corporate Social Responsibility (CSR)', def: 'A business\'s ethical obligations beyond profit — includes environmental, social, and supply chain responsibilities.', topic: 'General' },
+    { term: 'BRICS', def: 'Emerging economies: Brazil, Russia, India, China, South Africa — fast-growing markets for Western confectionery brands.', topic: 'General' },
+  ];
+
+  // ─── FLASHCARD STATE ──────────────────────────────────────────────────────────
+  let fcDeck = [];
+  let fcIndex = 0;
+  let fcGot = 0;
+  let fcMissed = 0;
+  let fcMissedCards = [];
+  let fcTotal = 0;
+  let fcIsFlipped = false;
+
+  function updateSlider(val) {
+    document.getElementById('fc-num-display').textContent = val;
+  }
+
+  let selectedTopics = new Set(['all']);
+
+  function toggleTopic(btn) {
+    const topic = btn.dataset.topic;
+    if (topic === 'all') {
+      selectedTopics.clear();
+      selectedTopics.add('all');
+      document.querySelectorAll('.fc-filter-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    } else {
+      selectedTopics.delete('all');
+      document.getElementById('fc-topic-filters').querySelector('[data-topic="all"]').classList.remove('selected');
+      if (btn.classList.contains('selected')) {
+        btn.classList.remove('selected');
+        selectedTopics.delete(topic);
+        if (selectedTopics.size === 0) {
+          selectedTopics.add('all');
+          document.getElementById('fc-topic-filters').querySelector('[data-topic="all"]').classList.add('selected');
+        }
+      } else {
+        btn.classList.add('selected');
+        selectedTopics.add(topic);
+      }
+    }
+  }
+
+  function startFlashcards() {
+    const count = parseInt(document.getElementById('fc-slider').value);
+    let pool = ALL_CARDS;
+
+    if (!selectedTopics.has('all')) {
+      pool = ALL_CARDS.filter(c => selectedTopics.has(c.topic.toLowerCase()));
+    }
+
+    // Shuffle pool
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    fcDeck = pool.slice(0, Math.min(count, pool.length));
+    fcTotal = fcDeck.length;
+    fcIndex = 0;
+    fcGot = 0;
+    fcMissed = 0;
+    fcMissedCards = [];
+
+    document.getElementById('fc-setup-screen').style.display = 'none';
+    document.getElementById('fc-results-screen').classList.remove('active');
+    document.getElementById('fc-game-screen').classList.add('active');
+
+    showCard();
+  }
+
+  function showCard() {
+    if (fcIndex >= fcDeck.length) { showResults(); return; }
+    const card = fcDeck[fcIndex];
+    document.getElementById('fc-term-text').textContent = card.term;
+    document.getElementById('fc-def-text').textContent = card.def;
+    document.getElementById('fc-term-topic').textContent = card.topic;
+    document.getElementById('fc-prog-text').textContent = `Card ${fcIndex + 1} of ${fcTotal}`;
+    document.getElementById('fc-got-count').textContent = fcGot;
+    document.getElementById('fc-miss-count').textContent = fcMissed;
+    document.getElementById('fc-prog-fill').style.width = (fcIndex / fcTotal * 100) + '%';
+
+    // Reset flip
+    fcIsFlipped = false;
+    const fcCard = document.getElementById('fc-card');
+    fcCard.classList.remove('flipped');
+  }
+
+  function flipCard() {
+    fcIsFlipped = !fcIsFlipped;
+    document.getElementById('fc-card').classList.toggle('flipped', fcIsFlipped);
+  }
+
+  function markCard(result) {
+    if (result === true) { fcGot++; }
+    else if (result === false) { fcMissed++; fcMissedCards.push(fcDeck[fcIndex]); }
+    // null = skip
+    fcIndex++;
+    if (fcIndex >= fcTotal) { showResults(); return; }
+    // Animate out then show next
+    const wrap = document.querySelector('.fc-card-wrap');
+    wrap.style.opacity = '0';
+    wrap.style.transform = 'translateX(20px)';
+    setTimeout(() => {
+      showCard();
+      wrap.style.transition = 'none';
+      wrap.style.opacity = '0';
+      wrap.style.transform = 'translateX(-20px)';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          wrap.style.transition = 'opacity 0.25s, transform 0.25s';
+          wrap.style.opacity = '1';
+          wrap.style.transform = 'translateX(0)';
+        });
+      });
+    }, 180);
+  }
+
+  function showResults() {
+    document.getElementById('fc-game-screen').classList.remove('active');
+    const results = document.getElementById('fc-results-screen');
+    results.classList.add('active');
+
+    const answered = fcGot + fcMissed;
+    const pct = answered > 0 ? Math.round((fcGot / answered) * 100) : 0;
+    document.getElementById('fc-final-score').textContent = `${fcGot}/${answered}`;
+
+    let msg = '';
+    if (pct === 100) msg = 'Perfect score! You know these cold. 🔥';
+    else if (pct >= 80) msg = 'Excellent — review the missed terms and you\'re ready.';
+    else if (pct >= 60) msg = 'Good progress — focus on the missed terms below.';
+    else msg = 'Keep practising — use the topic revision tabs to reinforce the tricky ones.';
+    document.getElementById('fc-final-msg').textContent = msg;
+
+    const missedList = document.getElementById('fc-missed-list');
+    const missedItems = document.getElementById('fc-missed-items');
+    if (fcMissedCards.length > 0) {
+      missedList.style.display = 'block';
+      missedItems.innerHTML = fcMissedCards.map(c =>
+        `<div class="fc-missed-item"><strong>${c.term}</strong> — ${c.def}</div>`
+      ).join('');
+    } else {
+      missedList.style.display = 'none';
+    }
+    document.getElementById('fc-prog-fill').style.width = '100%';
+  }
+
+  function restartFlashcards() {
+    document.getElementById('fc-results-screen').classList.remove('active');
+    document.getElementById('fc-setup-screen').style.display = 'block';
+    document.getElementById('fc-game-screen').classList.remove('active');
+  }
+
+  function resetFlashcardToSetup() {
+    document.getElementById('fc-results-screen').classList.remove('active');
+    document.getElementById('fc-game-screen').classList.remove('active');
+    document.getElementById('fc-setup-screen').style.display = 'block';
+  }
+
+  // ─── INIT ─────────────────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    initDevice();
+  });
+</script>
+</body>
+</html>
